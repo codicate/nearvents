@@ -61,8 +61,11 @@ export class AuthService {
 
   getCurrentUser() {
     const user = this.auth.currentUser;
-    const userDocRef = doc(this.firestore, `users/${user.uid}`);
-    return docData(userDocRef, { idField: 'id' });
+    console.log(user);
+    if (user !== null) {
+      const userDocRef = doc(this.firestore, `users/${user.uid}`);
+      return docData(userDocRef, { idField: 'id' });
+    }
   }
 
   private createUserDocument(user) {
