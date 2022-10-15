@@ -78,7 +78,6 @@ export class SigninPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      console.log(user);
       this.router.navigateByUrl('tabs', { replaceUrl: true });
     } else {
       this.showAlert('Login failed with Google failed', 'Please try again!');
