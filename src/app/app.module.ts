@@ -12,6 +12,11 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 
+// IOS native firebase auth fix
+import { Capacitor } from '@capacitor/core';
+import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
+import { getApp } from 'firebase/app';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -20,7 +25,15 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     IonicModule.forRoot(),
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
+    provideAuth(() => {
+      if (Capacitor.isNativePlatform()) {
+        return initializeAuth(getApp(), {
+          persistence: indexedDBLocalPersistence,
+        });
+      } else {
+        return getAuth();
+      }
+    }),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
