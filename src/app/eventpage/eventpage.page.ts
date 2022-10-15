@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { dataService } from 'app/data.service';
+import { event } from 'app/feed/event.model';
 
 @Component({
   selector: 'app-eventpage',
@@ -7,11 +8,12 @@ import { dataService } from 'app/data.service';
   styleUrls: ['./eventpage.page.scss'],
 })
 export class EventpagePage implements OnInit {
-  
+  pageEvent: event;
 
-  constructor() { }
+  constructor(public dataService: dataService) { }
 
   ngOnInit() {
+    this.dataService.getPageEvent.subscribe(message => this.pageEvent = message);
   }
 
 }
