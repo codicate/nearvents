@@ -9,9 +9,9 @@ import { player } from './player.model';
 export class LeaderboardPage implements OnInit {
 
   playerArray: player[] = [
-    (new player ("Herry Liu", "https://i.imgur.com/0b1S9Ze.jpg", 100)),
-    (new player ("Leo He", "https://i.imgur.com/0b1S9Ze.jpg", 200)),
-    (new player ("Grass Mud Horse", "https://i.imgur.com/0b1S9Ze.jpg", 150))
+    (new player (1, "Herry Liu", "https://i.imgur.com/0b1S9Ze.jpg", 250)),
+    (new player (2, "Leo He", "https://i.imgur.com/0b1S9Ze.jpg", 200)),
+    (new player (3, "Grass Mud Horse", "https://i.imgur.com/0b1S9Ze.jpg", 150))
   ];
 
   constructor() {
