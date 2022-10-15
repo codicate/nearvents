@@ -1,1 +1,12 @@
-<ion-content> Leaderboard </ion-content>
+<ion-content [scrollEvents]="true">
+  <ion-item *ngFor="let player of playerArray; index as i">
+    <ion-avatar slot="start">
+      <img
+        alt="Silhouette of a person's head"
+        src="{{ player.profilePicture }}"
+      />
+    </ion-avatar>
+    <ion-label> {{ player.name }} </ion-label>
+    <ion-label slot="end"> {{ player.points }} </ion-label>
+  </ion-item>
+</ion-content>

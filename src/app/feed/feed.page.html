@@ -1,1 +1,9 @@
-<ion-content> Feed </ion-content>
+<ion-content [scrollEvents]="true">
+  <ion-card *ngFor="let event of eventArray; index as i">
+    <img alt="Silhouette of mountains" src="{{ event.photoURL }}" />
+    <ion-card-title>{{ event.name }}</ion-card-title>
+    <ion-card-subtitle>{{ event.author}}</ion-card-subtitle>
+
+    <ion-card-content> {{ event.description }} </ion-card-content>
+  </ion-card>
+</ion-content>
