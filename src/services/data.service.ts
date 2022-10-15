@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { event } from './feed/event.model';
-import { player } from './leaderboard/player.model';
-import { image } from './image-feed/image.model';
+import { event } from '../app/feed/event.model';
+import { player } from '../app/leaderboard/player.model';
+import { image } from '../app/image-feed/image.model';
 
 import { AuthService } from 'services/auth.service';
 
@@ -19,12 +19,12 @@ export class dataService {
   ];
 
   eventArray: event[] = [
-    new event(1,100,"Dandyhacks 2022", "Rochester, NY", "https://i.imgur.com/0b1S9Ze.jpg", "Event Description"),
-    new event(2,200, "Bengaluru Marathon", "Bangalore Marathon", "https://i.imgur.com/Na5x4Fl.jpg", "Event Description"),
-    new event(3,300, "World Wrestling Championship", "Wuhan, China", "https://i.imgur.com/K08RkpX.jpg", "Event Description")
+    new event(1,100,"Dandyhacks 2022", "Rochester, NY", "https://i.imgur.com/0b1S9Ze.jpg", "Event Description",[]),
+    new event(2,200, "Bengaluru Marathon", "Bangalore Marathon", "https://i.imgur.com/Na5x4Fl.jpg", "Event Description",[]),
+    new event(3,300, "World Wrestling Championship", "Wuhan, China", "https://i.imgur.com/K08RkpX.jpg", "Event Description",[])
   ]
 
- currentEvent = new BehaviorSubject(new event(0,900,"TestEvent", "", "", ""));
+ currentEvent = new BehaviorSubject(new event(0,900,"TestEvent", "", "", "",[]));
  getPageEvent = this.currentEvent.asObservable();
 
  private events = new BehaviorSubject(this.eventArray);

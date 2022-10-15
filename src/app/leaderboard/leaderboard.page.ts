@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { player } from './player.model';
-import { dataService } from '../data.service';
+import { dataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-leaderboard',

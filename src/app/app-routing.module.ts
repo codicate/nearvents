@@ -39,6 +39,10 @@ const routes: Routes = [
     redirectTo: '',
     pathMatch: 'full',
   },
+  {
+    path: 'user-feed',
+    loadChildren: () => import('./user-feed/user-feed.module').then( m => m.UserFeedPageModule)
+  },
 ];
 @NgModule({
   imports: [

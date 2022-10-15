@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
 import { event } from 'app/feed/event.model';
 import { Router, RouterModule } from '@angular/router';
-import { dataService } from '../data.service';
+import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';

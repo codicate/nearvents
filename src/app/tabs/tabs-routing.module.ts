@@ -8,9 +8,9 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'map',
+        path: 'user-feed',
         loadChildren: () =>
-          import('../map/map.module').then((m) => m.MapPageModule),
+          import('../user-feed/user-feed.module').then(m => m.UserFeedPageModule),
       },
       {
         path: 'feed',

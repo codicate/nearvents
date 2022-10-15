@@ -6,15 +6,15 @@ export class player {
     profilePicture: string;
     points: number;
     playerID: number;
-    images: image[];
+    imageIDArray: string[];
 
 
-    constructor(rank: number, name: string, profilePicture: string, points: number, playerID: number, images: image[]) {
+    constructor(rank: number, name: string, profilePicture: string, points: number, playerID: number, imageIDArray: string[]) {
         this.rank = rank;
         this.name = name;
         this.profilePicture = profilePicture;
         this.points = points;
         this.playerID = playerID;
-        this.images = images;
+        this.imageIDArray = imageIDArray;
     }
 }

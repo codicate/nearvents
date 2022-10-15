@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
 import { event } from './event.model';
 import { Router, RouterModule } from '@angular/router';
-import { dataService } from '../data.service';
+import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -94,7 +94,7 @@ export class FeedPage implements OnInit {
   submitUserEvent() {
    // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
 
-  this.dataService.eventArray.unshift(new event(4, 1000, this.userEventName, this.userEventLocation, this.user.imageUrl, this.userEventDescription));
+  this.dataService.eventArray.unshift(new event(4, 1000, this.userEventName, this.userEventLocation, this.user.imageUrl, this.userEventDescription, []));
   }
 
 
