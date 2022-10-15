@@ -1,32 +1,40 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {
+  redirectUnauthorizedTo,
+  redirectLoggedInTo,
+  canActivate,
+} from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['tabs']);
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () =>
+      import('./signin/signin.module').then((m) => m.SigninPageModule),
   },
   {
-    path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
+    path: 'tabs',
+    loadChildren: () =>
+      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
-    path: 'map',
-    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+    path: 'eventpage',
+    loadChildren: () =>
+      import('./eventpage/eventpage.module').then((m) => m.EventpagePageModule),
   },
   {
-    path: 'leaderboard',
-    loadChildren: () => import('./leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
   },
-  {
-    path: 'feed',
-    loadChildren: () => import('./feed/feed.module').then( m => m.FeedPageModule)
-  }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

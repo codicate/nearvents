@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Leaderboard 🏆</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [scrollEvents]="true">
   <div *ngFor="let player of playerArray; index as i">
   <ion-card *ngIf="player.rank == 1" >  
@@ -28,12 +22,8 @@
     <ion-avatar>
       <img alt="Silhouette of a person's head" src="{{ player.profilePicture }}" />
     </ion-avatar>
-    <ion-label>
-      {{ player.name }}
-    </ion-label>
-    <ion-label slot="end">
-      {{ player.points }}
-    </ion-label>
+    <ion-label> {{ player.name }} </ion-label>
+    <ion-label slot="end"> {{ player.points }} </ion-label>
   </ion-item>
   </div>
 </ion-content>
