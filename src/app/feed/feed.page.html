@@ -1,13 +1,14 @@
 <ion-content [scrollEvents]="true">
+
+
   <ion-card
     *ngFor="let event of eventArray; 
     index as i"
-    color="warning"
-    (click)="onEventClick()"
-  >
-    <img src="{{ event.eventPicture }}" id="image" />
+    color="warning" >
+    <img [src]="event.eventPicture" />
 
-    <ion-card-title (click)="onEventClick" (click)="dataService.sendPageEvent(event)"> {{ event.eventName }} </ion-card-title>
+   <div (click)="onEventClick()">
+    <ion-card-title (click)="onEventClick()" (click)="dataService.sendPageEvent(event)"> {{ event.eventName }} </ion-card-title>
 
     <ion-card-subtitle>
       {{ event.eventCreator }}
@@ -17,5 +18,56 @@
     </ion-card-subtitle>
 
     <ion-card-content> {{ event.eventDescription }} </ion-card-content>
+    </div>
   </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="upload=false">
+    <ion-fab-button id="open">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal trigger="open" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Create an event</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="floating" color="warning">Enter your event name</ion-label>
+          <ion-input [(ngModel)]="userEventName" type="text" placeholder="Event Name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="warning">Enter your location</ion-label>
+          <ion-input [(ngModel)]="userEventDescription" type="text" placeholder="Event location"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="warning">Description</ion-label>
+          <ion-input [(ngModel)]="userEventDescription" type="text" placeholder="Write a short description"></ion-input>
+        </ion-item>
+          <ion-button *ngIf="!upload" type="button" expand="block" (click)="takePicture()" >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon></ion-button>
+          <ion-button *ngIf="upload" type="button" color="success" expand="block" >Picture Uploaded!</ion-button>
+          <img *ngIf="upload" [src]="user.imageUrl" />
+          <ion-button *ngIf="upload" type="button" color="warning" expand="block" (click)="takePicture()" >Upload a different one?</ion-button>
+      </ion-content>
+        <ion-button
+          (click)="confirm()"
+          (click)="submitUserEvent()"
+          class="main"
+          color="warning"
+          expand = "block">
+          Save Event  
+       <ion-icon 
+          name="enter-outline"
+          size="large">
+      </ion-icon>
+      </ion-button>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

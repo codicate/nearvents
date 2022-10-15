@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-item> {{user?.email}} </ion-item>
-  <img *ngIf="user?.imageUrl" [src]="user.imageUrl" />
+  <img *ngIf="user?.imageUrl" [src]="user.imageUrl"/>
   <ion-button type="button" expand="block" (click)="signOut()"
     >Sign Out</ion-button
   >
