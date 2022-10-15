@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { player } from './player.model';
+import { dataService } from '../data.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -8,16 +9,13 @@ import { player } from './player.model';
 })
 export class LeaderboardPage implements OnInit {
 
-  playerArray: player[] = [
-    (new player (1, "Herry Liu", "https://i.imgur.com/0b1S9Ze.jpg", 250)),
-    (new player (2, "Leo He", "https://i.imgur.com/0b1S9Ze.jpg", 200)),
-    (new player (3, "Grass Mud Horse", "https://i.imgur.com/0b1S9Ze.jpg", 150))
-  ];
+  playerArray: player[] = [];
 
-  constructor() {
+  constructor(private dataService: dataService) {
   }
 
   ngOnInit() {
+    this.dataService.getPlayers.subscribe(message => this.playerArray = message);
   }
 
   onStart(){

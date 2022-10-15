@@ -5,17 +5,17 @@
     color="warning"
     (click)="onEventClick()"
   >
-    <img src="{{ event.photoURL }}" id="image" />
+    <img src="{{ event.eventPicture }}" id="image" />
 
-    <ion-card-title (click)="onEventClick"> {{ event.name }} </ion-card-title>
+    <ion-card-title (click)="onEventClick"> {{ event.eventName }} </ion-card-title>
 
     <ion-card-subtitle>
+      {{ event.eventCreator }}
       <ion-avatar>
-        <img src="{{ event.authorURL }}" id="image" />
+        <img src="{{ dataService.getPlayerPicture(event.eventCreator) }}" id="image" />
       </ion-avatar>
-      {{ event.author}}
     </ion-card-subtitle>
 
-    <ion-card-content> {{ event.description }} </ion-card-content>
+    <ion-card-content> {{ event.eventDescription }} </ion-card-content>
   </ion-card>
 </ion-content>
