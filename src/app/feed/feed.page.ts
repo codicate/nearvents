@@ -8,7 +8,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
-import { AlertController, LoadingController } from '@ionic/angular'
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-feed',
@@ -42,7 +42,7 @@ export class FeedPage implements OnInit {
 
   onEventClick(){
     console.log("Clicked");
-    //this.router.navigate(['eventpage']);
+    this.router.navigate(['eventpage']);
   }
 
   @ViewChild(IonModal) modal: IonModal;
@@ -92,7 +92,9 @@ export class FeedPage implements OnInit {
 
 
   submitUserEvent() {
-  this.dataService.eventArray.unshift(new event(4,this.userEventName, this.userEventLocation, "Siddharth Narsipur", this.user.imageUrl, this.userEventDescription));
+   // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
+
+  this.dataService.eventArray.unshift(new event(4, 1000, this.userEventName, this.userEventLocation, this.user.imageUrl, this.userEventDescription));
   }
 
 

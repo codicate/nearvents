@@ -1,5 +1,62 @@
-<ion-title>
-  {{ pageEvent.eventName }}
-</ion-title>
+<ion-content>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title style="text-align:center">{{ pageEvent.eventName }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <img [src]="pageEvent.eventPicture">
+
+  <ion-avatar>
+    <img src="{{ getPlayerAvatar(pageEvent.playerID) }}" id="image" />
+  </ion-avatar>
+
+  <p>Created by {{ getPlayerName(pageEvent.playerID) }}</p>
+  <p> {{pageEvent.eventDescription }}</p>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="open" (click)="takePicture()">
+    <ion-fab-button id="open" color="light">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+ 
+  <!-- <ion-modal trigger="open" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Upload your event image</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+          <ion-button *ngIf="!upload" type="button" expand="block" (click)="takePicture()" >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon></ion-button>           <img *ngIf="upload" [src]="user.imageUrl" />
+          <ion-button *ngIf="upload" type="button" color="warning" expand="block" (click)="takePicture()" >Upload a different one?</ion-button>
+      </ion-content>
+        <ion-button
+          (click)="confirm()"
+          class="main"
+          color="success"
+          expand = "block">
+          Save 
+       <ion-icon 
+          style="margin-left: 10px;"
+          name="save-outline"
+          size="small">
+      </ion-icon>
+      </ion-button>
+    </ng-template>
+  </ion-modal> -->
+
+  <image-feed></image-feed>
+
+</ion-content>
+
+
+
+
+
 
 

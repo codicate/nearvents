@@ -1,4 +1,9 @@
 <ion-content [scrollEvents]="true">
+  <ion-item>
+    <ion-label>
+      <h1 style="text-align:center">Leaderboard</h1>
+    </ion-label>
+  </ion-item>
   <div *ngFor="let player of playerArray; index as i">
   <ion-card *ngIf="player.rank == 1" >  
     <ion-card-header>

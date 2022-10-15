@@ -8,6 +8,8 @@ import { EventpagePageRoutingModule } from './eventpage-routing.module';
 
 import { EventpagePage } from './eventpage.page';
 
+import { ImageFeedComponent } from 'app/image-feed/image-feed.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { EventpagePage } from './eventpage.page';
     IonicModule,
     EventpagePageRoutingModule
   ],
-  declarations: [EventpagePage]
+  declarations: [EventpagePage, ImageFeedComponent]
 })
 export class EventpagePageModule {}

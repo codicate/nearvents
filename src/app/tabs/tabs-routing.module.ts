@@ -24,11 +24,18 @@ const routes: Routes = [
             (m) => m.LeaderboardPageModule
           ),
       },
+      // {
+      //   path: '',
+      //   redirectTo: 'tabs/feed',
+      //   pathMatch: 'full',
+      // },
       {
         path: '',
-        redirectTo: 'tabs/feed',
-        pathMatch: 'full',
-      },
+        loadChildren: () =>
+          import('../eventpage/eventpage.module').then( 
+            (m) => m.EventpagePageModule
+          ),
+      }
     ],
   },
   {
