@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Photo } from '@capacitor/camera';
 import { Auth } from '@angular/fire/auth';
-import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
+import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import {
   getDownloadURL,
   ref,
@@ -30,7 +30,7 @@ export class CameraService {
       const imageUrl = await getDownloadURL(storageRef);
 
       const userDocRef = doc(this.firestore, `users/${user.uid}`);
-      await setDoc(userDocRef, {
+      await updateDoc(userDocRef, {
         imageUrl,
       });
       return true;
