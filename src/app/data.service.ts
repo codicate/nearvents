@@ -16,9 +16,9 @@ export class dataService {
   ];
 
   eventArray: event[] = [
-    new event(1,"Dandyhacks 2022", "Rochester, NY", this.getPlayerName(1), "https://i.imgur.com/0b1S9Ze.jpg", "Hello"),
-    new event(2,"Bengaluru Marathon", "Bangalore Marathon", this.getPlayerName(2), "https://i.imgur.com/Na5x4Fl.jpg", "Hello"),
-    new event(3,"World Wrestling Championship", "Wuhan, China", this.getPlayerName(3), "https://i.imgur.com/K08RkpX.jpg", "Hello")
+    new event(1,"Dandyhacks 2022", "Rochester, NY", this.getPlayerName(1), "https://i.imgur.com/0b1S9Ze.jpg", "Event Description"),
+    new event(2,"Bengaluru Marathon", "Bangalore Marathon", this.getPlayerName(2), "https://i.imgur.com/Na5x4Fl.jpg", "Event Description"),
+    new event(3,"World Wrestling Championship", "Wuhan, China", this.getPlayerName(3), "https://i.imgur.com/K08RkpX.jpg", "Event Description")
   ]
 
  currentEvent = new BehaviorSubject(new event(0, "TestEvent", "", "", "", ""));
