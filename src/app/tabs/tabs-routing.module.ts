@@ -26,14 +26,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/feed',
+        redirectTo: 'tabs/feed',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/feed',
+    redirectTo: 'tabs/feed',
     pathMatch: 'full',
   },
 ];
