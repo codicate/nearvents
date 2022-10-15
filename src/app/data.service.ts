@@ -21,6 +21,9 @@ export class dataService {
     new event(3,"World Wrestling Championship", "Wuhan, China", this.getPlayerName(3), "https://i.imgur.com/K08RkpX.jpg", "Hello")
   ]
 
+ currentEvent = new BehaviorSubject(new event(0, "TestEvent", "", "", "", ""));
+ getPageEvent = this.currentEvent.asObservable();
+
  private events = new BehaviorSubject(this.eventArray);
  getEvents = this.events.asObservable();
 
@@ -56,4 +59,13 @@ getPlayerPicture(playerName: string) {
  getEvent(playerName: string) {
    return event;
  }
+
+ sendPageEvent(message: event) {
+   this.currentEvent.next(message);
+ }
+
+ getCurrentevent() {
+   return this.currentEvent;
+ }
+
 }

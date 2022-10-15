@@ -1,7 +1,8 @@
 {
   "name": "Dandyhack22",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

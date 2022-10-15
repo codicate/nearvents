@@ -7,7 +7,7 @@
   >
     <img src="{{ event.eventPicture }}" id="image" />
 
-    <ion-card-title (click)="onEventClick"> {{ event.eventName }} </ion-card-title>
+    <ion-card-title (click)="onEventClick" (click)="dataService.sendPageEvent(event)"> {{ event.eventName }} </ion-card-title>
 
     <ion-card-subtitle>
       {{ event.eventCreator }}
