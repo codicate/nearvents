@@ -1,7 +1,3 @@
-# Dandyhack22
+Social platform using event-based system to connect people together. 
 
-https://dandyhacks-2022.devpost.com
-
-Henry, Siddharth, Suchith
-
-- need to update ios Info.plist https://capacitorjs.com/docs/apis/camera#ios
+Created by Siddharth Narsipur, Henry Liu and Suchith Hedge at the University of Rochester for Dandyhacks '22
