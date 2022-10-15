@@ -9,13 +9,19 @@ import { AuthService } from 'services/auth.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  user = null;
+
   constructor(
     private router: Router,
     private loadingController: LoadingController,
     private authService: AuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   async signOut() {
     const loading = await this.loadingController.create();
@@ -26,4 +32,6 @@ export class ProfilePage implements OnInit {
 
     this.router.navigateByUrl('', { replaceUrl: true });
   }
+
+  async takePicture() {}
 }
