@@ -21,6 +21,11 @@ const routes: Routes = [
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
+    path: 'eventpage',
+    loadChildren: () =>
+      import('./eventpage/eventpage.module').then((m) => m.EventpagePageModule),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
