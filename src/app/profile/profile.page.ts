@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AuthService } from 'services/auth.service';
+import { CameraService } from 'services/camera.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +16,9 @@ export class ProfilePage implements OnInit {
   constructor(
     private router: Router,
     private loadingController: LoadingController,
-    private authService: AuthService
+    private alertController: AlertController,
+    private authService: AuthService,
+    private cameraService: CameraService
   ) {}
 
   ngOnInit() {
@@ -33,5 +37,29 @@ export class ProfilePage implements OnInit {
     this.router.navigateByUrl('', { replaceUrl: true });
   }
 
-  async takePicture() {}
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera, // Camera, Photos or Prompt!
+    });
+
+    if (image) {
+      const loading = await this.loadingController.create();
+      await loading.present();
+
+      const result = await this.cameraService.uploadImage(image);
+      loading.dismiss();
+
+      if (!result) {
+        const alert = await this.alertController.create({
+          header: 'Upload failed',
+          message: 'There was a problem uploading your picture.',
+          buttons: ['OK'],
+        });
+        await alert.present();
+      }
+    }
+  }
 }
