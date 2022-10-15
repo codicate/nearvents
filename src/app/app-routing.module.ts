@@ -21,7 +21,11 @@ const routes: Routes = [
   {
     path: 'feed',
     loadChildren: () => import('./feed/feed.module').then( m => m.FeedPageModule)
-  }
+  },
+   { 
+     path: 'eventpage',
+     loadChildren: () => import('./eventpage/eventpage.module').then( m => m.EventpagePageModule)
+   }
 ];
 @NgModule({
   imports: [
