@@ -1,19 +1,19 @@
 import { StringFormat } from "@angular/fire/storage";
 
 export class event {
-    name: string;
-    location: string;
-    author: string;
-    authorURL: string;
-    photoURL: string;
-    description: string;
+    playerID: number;
+    eventName: string;
+    eventLocation: string;
+    eventCreator: string;
+    eventPicture: string;
+    eventDescription: string;
 
-    constructor(name: string, location: string, author: string, photoURL: string, authorURL: string, description: string) {
-        this.name = name;
-        this.location = location;
-        this.author = author;
-        this.authorURL = authorURL;
-        this.photoURL = photoURL;
-        this.description = description;
+    constructor(playerID: number, eventName: string, eventLocation: string, eventCreator: string, eventPicture: string, eventDescription: string) {
+        this.playerID = playerID;
+        this.eventName = eventName;
+        this.eventLocation = eventLocation;
+        this.eventCreator = eventCreator;
+        this.eventPicture = eventPicture;
+        this.eventDescription = eventDescription;
     }
 }
