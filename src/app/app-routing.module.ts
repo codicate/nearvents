@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {
-  redirectUnauthorizedTo,
-  redirectLoggedInTo,
-  canActivate,
-} from '@angular/fire/auth-guard';
-
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['tabs']);
 
 const routes: Routes = [
   {
@@ -24,6 +16,11 @@ const routes: Routes = [
     path: 'eventpage',
     loadChildren: () =>
       import('./eventpage/eventpage.module').then((m) => m.EventpagePageModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfilePageModule),
   },
   {
     path: '**',

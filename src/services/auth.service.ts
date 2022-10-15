@@ -45,7 +45,11 @@ export class AuthService {
     }
   }
 
-  logout() {
-    return signOut(this.auth);
+  signOut() {
+    try {
+      return signOut(this.auth);
+    } catch (e) {
+      return null;
+    }
   }
 }

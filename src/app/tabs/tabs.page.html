@@ -1,7 +1,10 @@
 <ion-tabs>
   <ion-header>
     <ion-toolbar>
-      <ion-title>sfdsdf</ion-title>
+      <div class="header">
+        <p>{{user.point}} Points</p>
+        <img src="{{user.avatar}}" class="avatar" (click)="goToProfilePage()" />
+      </div>
     </ion-toolbar>
   </ion-header>
 
