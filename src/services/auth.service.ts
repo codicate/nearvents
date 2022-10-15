@@ -45,11 +45,15 @@ export class AuthService {
     }
   }
 
-  signOut() {
+  async signOut() {
     try {
-      return signOut(this.auth);
+      await signOut(this.auth);
     } catch (e) {
       return null;
     }
+  }
+
+  getCurrentUser() {
+    return this.auth.currentUser;
   }
 }

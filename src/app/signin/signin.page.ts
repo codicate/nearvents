@@ -34,6 +34,12 @@ export class SigninPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    // const currentUser = this.authService.getCurrentUser();
+    // console.log(currentUser);
+    // if (currentUser) {
+    //   this.router.navigateByUrl('tabs', { replaceUrl: true });
+    // }
   }
 
   async register() {
