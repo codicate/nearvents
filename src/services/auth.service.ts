@@ -7,7 +7,13 @@ import {
   signInWithPopup,
   signOut,
 } from '@angular/fire/auth';
-import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
+import {
+  doc,
+  docData,
+  Firestore,
+  getDoc,
+  setDoc,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +50,10 @@ export class AuthService {
         this.auth,
         new GoogleAuthProvider()
       );
-      this.createUserDocument(user);
+      const snapshot = await getDoc(doc(this.firestore, `users/${user.uid}`));
+      if (!snapshot.exists()) {
+        this.createUserDocument(user);
+      }
       return user;
     } catch (e) {
       console.error(e);
