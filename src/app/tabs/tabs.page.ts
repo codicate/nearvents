@@ -12,8 +12,10 @@ export class TabsPage implements OnInit {
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  async ngOnInit() {
-    this.user = await this.authService.getCurrentUser();
+  ngOnInit() {
+    this.authService.subscribeToUserUpdates((user) => {
+      this.user = user;
+    });
   }
 
   goToProfilePage() {

@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/auth';
 import {
   doc,
-  docData,
+  onSnapshot,
   Firestore,
   getDoc,
   setDoc,
@@ -89,6 +89,14 @@ export class AuthService {
       events: [],
       images: [],
       picture,
+    });
+  }
+
+  subscribeToUserUpdates(callback) {
+    const user = this.auth.currentUser;
+    const userDocRef = doc(this.firestore, 'users', user.uid);
+    return onSnapshot(userDocRef, (d) => {
+      callback(d.data());
     });
   }
 }
