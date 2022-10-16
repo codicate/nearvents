@@ -3,12 +3,12 @@ import { Auth } from '@angular/fire/auth';
 import {
   collection,
   doc,
-  docData,
   Firestore,
   getDocs,
   getDoc,
-  setDoc,
   addDoc,
+  query,
+  where,
 } from '@angular/fire/firestore';
 import { CameraService } from './camera.service';
 
@@ -60,7 +60,16 @@ export class EventService {
 
   async getEvent(id) {
     try {
-      const event = await getDoc(doc(this.firestore, 'events', id));
+      const q = query(
+        collection(this.firestore, 'events'),
+        where('creatorPlayerID', '==', id)
+      );
+      const querySnapshot = await getDocs(q);
+
+      const event = querySnapshot.docs.map((d) => d.data())[0];
+      const creator = await this.getPlayer(event.creatorPlayerID);
+      event.creator = creator.data();
+
       return event;
     } catch (e) {
       console.error(e);
