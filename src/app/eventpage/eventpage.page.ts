@@ -64,6 +64,7 @@ export class EventpagePage implements OnInit {
       replaceUrl: true,
     });
   }
+  
 
   async takePicture() {
     const image = await Camera.getPhoto({
