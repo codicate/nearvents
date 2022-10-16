@@ -13,3 +13,5 @@ Created by Siddharth Narsipur, Henry Liu and Suchith Hedge at the University of 
 - event service (Henry)
 
 - point system
+
+- change save event to update event when user already created an event (Henry)

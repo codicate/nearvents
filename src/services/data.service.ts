@@ -6,16 +6,15 @@ import Image from '../models/image.model';
 @Injectable({
   providedIn: 'root',
 })
-export class dataService {
-
+export class DataService {
   imageArray: Image[] = [];
 
-  currentID = new BehaviorSubject("");
+  currentID = new BehaviorSubject('');
   getID = this.currentID.asObservable();
 
   constructor() {}
 
-  getCurrentID(message: string){
+  getCurrentID(message: string) {
     this.currentID.next(message);
   }
 }

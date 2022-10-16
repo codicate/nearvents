@@ -9,7 +9,7 @@ import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
 import { EventService } from 'services/event.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dataService } from 'services/data.service';
+import { DataService } from 'services/data.service';
 
 @Component({
   selector: 'app-feed',
@@ -24,7 +24,7 @@ export class FeedPage implements OnInit {
   image = null;
 
   constructor(
-    private dataService: dataService,
+    private dataService: DataService,
     private fb: FormBuilder,
     private router: Router,
     private loadingController: LoadingController,
@@ -97,6 +97,8 @@ export class FeedPage implements OnInit {
       );
       await loading.dismiss();
 
+      this.image = null;
+      this.credentials.reset();
       this.modal.dismiss(null, 'cancel');
     }
   }
