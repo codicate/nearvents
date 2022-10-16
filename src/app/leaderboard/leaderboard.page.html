@@ -1,10 +1,14 @@
-<ion-content [scrollEvents]="true">
+<ion-content >
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-item>
     <ion-label>
       <h1 style="text-align: center">Leaderboard</h1>
     </ion-label>
   </ion-item>
-  <div *ngIf="players.length > 0">
+
+  <!-- <div>
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{players?.[0].name}}</ion-card-title>
@@ -21,15 +25,31 @@
           <ion-label>Points earned: {{players?.[0].points}}</ion-label>
         </ion-item>
       </ion-card-content>
-    </ion-card>
+    </ion-card> -->
 
-    <ion-item *ngFor="let player of players.slice(1); let i = index">
-      <ion-label> {{ i + 2 }} </ion-label>
+    <!-- <ion-item *ngFor="let player of players; let i = index">
+      <ion-label> {{ i+1 }} </ion-label>
       <ion-avatar>
         <img src="{{ player.picture }}" />
       </ion-avatar>
       <ion-label> {{ player.name }} </ion-label>
       <ion-label slot="end"> {{ player.points }} </ion-label>
-    </ion-item>
-  </div>
+    </ion-item> -->
+
+    <ion-item *ngFor="let player of players; let i = index">
+    <ion-row>
+      <ion-avatar class="ion-avatar">
+        <img src="{{ player.picture }}" id="image" />
+        <img id="image" />
+      </ion-avatar>
+      <div class="eventDetails">
+        <p><strong>{{ player.name }}</strong></p>
+        <p style="font-size: 75%">
+          <strong>By {{player.points }}</strong>
+        </p>
+      </div>
+    </ion-row>
+  </ion-item>
+
+  <!-- </div> -->
 </ion-content>
