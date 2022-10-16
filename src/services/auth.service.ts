@@ -68,15 +68,15 @@ export class AuthService {
     }
   }
 
-  getCurrentUser() {
+  async getCurrentUser() {
     const user = this.auth.currentUser;
-    const userDocRef = doc(this.firestore, `users/${user.uid}`);
-    return docData(userDocRef, { idField: 'id' });
+    const docRef = await getDoc(doc(this.firestore, 'users', user.uid));
+    return docRef.data();
   }
 
   async createUser(image, name) {
     const user = this.auth.currentUser;
-    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    const userDocRef = doc(this.firestore, 'users', user.uid);
     const picture = await this.cameraService.uploadImage(
       image,
       'profile/' + user.uid

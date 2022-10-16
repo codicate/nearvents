@@ -45,9 +45,7 @@ export class FeedPage implements OnInit {
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
     });
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.user = user;
-    });
+    this.user = await this.authService.getCurrentUser();
     this.events = await this.eventService.getAllEvents();
   }
 

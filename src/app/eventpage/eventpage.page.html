@@ -1,5 +1,4 @@
 <ion-content *ngIf="event">
-  
   <!-- <ion-avatar>
     <img src="{{ event.creator?.picture }}">
   </ion-avatar>
@@ -16,30 +15,41 @@
  
   <h1 style="text-align:center;"><strong>{{ event?.name }}</strong></h1> -->
 
-  <h1 style="text-align:center;"><strong>{{ event?.name }}</strong></h1>
+  <h1 style="text-align: center"><strong>{{ event?.name }}</strong></h1>
 
-			<div class="profile-stats">
+  <div class="profile-stats">
+    <ul>
+      <li>
+        <span class="profile-stat-count">{{ event?.imageArray.length }}</span>
+        Photos
+      </li>
+      <li><span class="profile-stat-count">206</span> Favorites</li>
+      <li>
+        <ion-button (click)="goToMap()"
+          ><ion-icon name="navigate-outline"></ion-icon
+        ></ion-button>
+      </li>
+    </ul>
+  </div>
 
-				<ul>
-					<li><span class="profile-stat-count">{{ event?.imageArray.length }}</span> Photos</li>
-					<li><span class="profile-stat-count">206</span> Favorites</li>
-          <li><ion-button (click)="goToMap()"><ion-icon name="navigate-outline"></ion-icon></ion-button></li>
-				</ul>
+  <ion-card class="blur" *ngIf="blur">
+    <ion-card-header>
+      <ion-card-title
+        ><ion-icon size="large" name="eye-off-outline"></ion-icon
+      ></ion-card-title>
+      <ion-card-title><strong>Hidden Content</strong></ion-card-title>
+    </ion-card-header>
 
-			</div>
+    <ion-card-content class="mainCard">
+      <strong
+        >Check-in with a photo upload yourself to discover some others!</strong
+      >
+    </ion-card-content>
+    <ion-button color="warning" fill="outline" (click)="takePicture()"
+      >Check-in <ion-icon slot="end" name="camera-outline"></ion-icon
+    ></ion-button>
+    <hr />
+  </ion-card>
 
-      <ion-card class="blur" *ngIf="blur">
-        <ion-card-header>
-          <ion-card-title ><ion-icon size="large" name="eye-off-outline"></ion-icon></ion-card-title>
-          <ion-card-title><strong>Hidden Content</strong></ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content class="mainCard">
-          <strong>Check-in with a photo upload yourself to discover some others!</strong>
-        </ion-card-content>
-        <ion-button color="warning" fill="outline" >Check-in <ion-icon slot="end" name="camera-outline"></ion-icon></ion-button>
-        <hr>
-      </ion-card>
-
-  <image-feed *ngIf="blur" class ="bg-image"></image-feed>
+  <image-feed [class.bg-image]="blur"></image-feed>
 </ion-content>

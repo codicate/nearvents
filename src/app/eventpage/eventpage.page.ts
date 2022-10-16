@@ -12,7 +12,6 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'services/event.service';
 
-
 @Component({
   selector: 'app-eventpage',
   templateUrl: './eventpage.page.html',
@@ -21,10 +20,8 @@ import { EventService } from 'services/event.service';
 export class EventpagePage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   pageEvent: Event;
-  upload = false;
   user = null;
   orderby: string;
-  userID = null;
   name: string;
   event = null;
   blur = true;
@@ -40,6 +37,20 @@ export class EventpagePage implements OnInit {
     private authService: AuthService
   ) {}
 
+  async ngOnInit() {
+    this.dataService.getID.subscribe(async (message) => {
+      if (message) {
+        const ev = await this.eventService.getEvent(message);
+        const user = await this.authService.getCurrentUser();
+        if (ev.creatorPlayerID === user.id) {
+          this.blur = false;
+        }
+        this.user = user;
+        this.event = ev;
+      }
+    });
+  }
+
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
@@ -48,22 +59,18 @@ export class EventpagePage implements OnInit {
     this.modal.dismiss(this.name, 'confirm');
   }
 
-  goToMap(){
+  goToMap() {
     this.router.navigateByUrl('tabs/tabs/map', {
       replaceUrl: true,
     });
   }
 
-  takePicture(){}
-
-  async ngOnInit() {
-    this.dataService.getID.subscribe(async (message) => {
-      this.userID = message;
-      if(message) this.event = await this.eventService.getEvent(message);
-      console.log("event is", this.event)
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera, // Camera, Photos or Prompt!
     });
-    console.log('The user id is', this.userID);
-    
-    
   }
 }

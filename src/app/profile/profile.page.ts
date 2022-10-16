@@ -21,10 +21,8 @@ export class ProfilePage implements OnInit {
     private cameraService: CameraService
   ) {}
 
-  ngOnInit() {
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.user = user;
-    });
+  async ngOnInit() {
+    this.user = await this.authService.getCurrentUser();
   }
 
   async signOut() {
