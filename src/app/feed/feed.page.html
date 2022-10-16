@@ -1,30 +1,35 @@
 <ion-content [scrollEvents]="true" color="dark">
-
   <h1 id="topHeading"><strong>Events near Rochester, NY</strong></h1>
-  
+
   <div
     (click)="onEventClick()"
     (click)="dataService.sendPageEvent(event)"
     *ngFor="let event of eventArray; 
-    index as i">
-
+    index as i"
+  >
     <ion-row>
-    <ion-avatar class ="ion-avatar">
-      <img src="{{ dataService.getPlayerPicture(event.creatorPlayerID) }}" id="image" />
-      <img id="image" />
-    </ion-avatar>
-    <div class="eventDetails">
-      <p><strong>{{ event.name }}</strong></p>
-      <p style="font-size:75%"><strong>By {{ dataService.getPlayerName(event.creatorPlayerID) }}</strong></p>
-    </div>
-  </ion-row>
-
+      <ion-avatar class="ion-avatar">
+        <img
+          src="{{ dataService.getPlayerPicture(event.creatorPlayerID) }}"
+          id="image"
+        />
+        <img id="image" />
+      </ion-avatar>
+      <div class="eventDetails">
+        <p><strong>{{ event.name }}</strong></p>
+        <p style="font-size: 75%">
+          <strong
+            >By {{ dataService.getPlayerName(event.creatorPlayerID) }}</strong
+          >
+        </p>
+      </div>
+    </ion-row>
 
     <div class="image-container">
       <img id="banner" [src]="event.banner" />
-  </div>
-  
-  <!-- <ion-card>
+    </div>
+
+    <!-- <ion-card>
    
     <ion-card-title id="cardTitle"> {{ event.name }} </ion-card-title>
 
@@ -35,10 +40,14 @@
 
     <ion-card-content> {{ event.description }} </ion-card-content>
   </ion-card> -->
+  </div>
 
-</div>  
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="upload=false">
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    (click)="upload=false"
+  >
     <ion-fab-button id="opens" color="light">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
@@ -56,35 +65,63 @@
       </ion-header>
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-label position="floating" color="warning">Enter your event name</ion-label>
-          <ion-input [(ngModel)]="userEventName" type="text" placeholder="Event Name"></ion-input>
+          <ion-label position="floating" color="warning"
+            >Enter your event name</ion-label
+          >
+          <ion-input
+            [(ngModel)]="userEventName"
+            type="text"
+            placeholder="Event Name"
+          ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating" color="warning">Enter your location</ion-label>
-          <ion-input [(ngModel)]="userEventLocation" type="text" placeholder="Event location"></ion-input>
+          <ion-label position="floating" color="warning"
+            >Enter your location</ion-label
+          >
+          <ion-input
+            [(ngModel)]="userEventLocation"
+            type="text"
+            placeholder="Event location"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating" color="warning">Description</ion-label>
-          <ion-input [(ngModel)]="userEventDescription" type="text" placeholder="Write a short description"></ion-input>
+          <ion-input
+            [(ngModel)]="userEventDescription"
+            type="text"
+            placeholder="Write a short description"
+          ></ion-input>
         </ion-item>
-          <ion-button *ngIf="!upload" type="button" expand="block" (click)="takePicture()" >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon></ion-button>
-          <ion-button *ngIf="upload" type="button" color="success" expand="block" >Picture Uploaded!</ion-button>
-          <img *ngIf="upload" [src]="user.imageUrl" />
-          <ion-button *ngIf="upload" type="button" color="warning" expand="block" (click)="takePicture()" >Upload a different one?</ion-button>
-      </ion-content>
         <ion-button
-          (click)="confirm()"
-          (click)="submitUserEvent()"
-          class="main"
+          *ngIf="!upload"
+          type="button"
+          expand="block"
+          (click)="takePicture()"
+          >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon
+        ></ion-button>
+        <ion-button *ngIf="upload" type="button" color="success" expand="block"
+          >Picture Uploaded!</ion-button
+        >
+        <img *ngIf="upload" [src]="user.imageUrl" />
+        <ion-button
+          *ngIf="upload"
+          type="button"
           color="warning"
-          expand = "block">
-          Save Event  
-       <ion-icon 
-          name="enter-outline"
-          size="large">
-      </ion-icon>
+          expand="block"
+          (click)="takePicture()"
+          >Upload a different one?</ion-button
+        >
+      </ion-content>
+      <ion-button
+        (click)="confirm()"
+        (click)="submitUserEvent()"
+        class="main"
+        color="warning"
+        expand="block"
+      >
+        Save Event
+        <ion-icon name="enter-outline" size="large"> </ion-icon>
       </ion-button>
     </ng-template>
   </ion-modal>
-
 </ion-content>

@@ -1,29 +1,34 @@
 <ion-content>
-
   <ion-header>
     <ion-toolbar>
       <ion-buttons>
         <ion-back-button>Back</ion-back-button>
-      </ion-buttons>  
-      <ion-title style="text-align:center">{{ pageEvent.name }}</ion-title>
+      </ion-buttons>
+      <ion-title style="text-align: center">{{ pageEvent.name }}</ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  <img [src]="pageEvent.banner">
+
+  <img [src]="pageEvent.banner" />
 
   <ion-avatar>
     <img src="{{ getPlayerAvatar(pageEvent.creatorPlayerID) }}" id="image" />
   </ion-avatar>
 
   <p>Created by {{ getPlayerName(pageEvent.creatorPlayerID) }}</p>
-  <p> {{pageEvent.description }}</p>
+  <p>{{pageEvent.description }}</p>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="open" (click)="takePicture()">
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    id="open"
+    (click)="takePicture()"
+  >
     <ion-fab-button id="open" color="light">
       <ion-icon name="camera-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
- 
+
   <!-- <ion-modal trigger="open" (willDismiss)="onWillDismiss($event)">
     <ng-template>
       <ion-header>
@@ -54,12 +59,4 @@
   </ion-modal> -->
 
   <image-feed></image-feed>
-
 </ion-content>
-
-
-
-
-
-
-

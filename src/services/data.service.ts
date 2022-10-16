@@ -43,7 +43,7 @@ export class dataService {
       'Dandyhacks 2022',
       'Rochester, NY',
       'Welcome',
-      'https://i.imgur.com/5Fu6VcT.jpg',
+      'https://i.imgur.com/nVZNp9e.jpg',
       [],
       '101'
     ),
@@ -51,7 +51,7 @@ export class dataService {
       'World Chess Championship',
       'Berlin, Germany',
       'Welcome',
-      'https://i.imgur.com/nYHosgL.jpg',
+      'https://i.imgur.com/sNYlHqA.jpg',
       [],
       '102'
     ),

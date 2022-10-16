@@ -7,7 +7,7 @@ export default class Event {
   description: string;
   banner: string;
   imageArray: Image[];
-  eventID: string;
+  creatorPlayerID: string;
 
   constructor(
     name: string,
@@ -15,13 +15,13 @@ export default class Event {
     description: string,
     image: string,
     imageArray: Image[],
-    eventID: string
+    creatorPlayerID: string
   ) {
     this.name = name;
     this.location = location;
     this.description = description;
     this.banner = image;
     this.imageArray = imageArray;
-    this.eventID = eventID;
+    this.creatorPlayerID = creatorPlayerID;
   }
 }
