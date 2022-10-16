@@ -2,6 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { EventService } from 'services/event.service';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+import { DataService } from 'services/data.service'
+import { Router } from '@angular/router';
 
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -29,6 +31,13 @@ export class MapPage implements AfterViewInit {
   private map;
   events = []
 
+  private onPopupClick(e){
+    console.log(e)
+    this.router.navigateByUrl('tabs/tabs/eventpage/' + e,{
+      replaceUrl: true,
+    });
+    this.dataService.getCurrentID(e);
+  }
   private initMap(): void {
     this.map = L.map('map', {
       renderer: L.canvas(),
@@ -44,9 +53,11 @@ export class MapPage implements AfterViewInit {
 
     tiles.addTo(this.map);
     for (let e of this.events) {
-      const popup = L.popup().setContent(`<center> ${e.name} </center> <img src="${e.banner}"> `);
+      const popup = L.DomUtil.create('div', 'infoWindow');
+      popup.innerHTML = `<center> ${e.name} </center> <img src="${e.banner}"> `;
       const marker = new L.Marker(e.location);
       marker.bindPopup(popup);
+      L.DomEvent.addListener(popup, 'click', () => this.onPopupClick(e.creatorPlayerID  ));
       marker.addTo(this.map);
     }
     setTimeout(()=> { this.map.invalidateSize()}, 500);
@@ -54,7 +65,9 @@ export class MapPage implements AfterViewInit {
   }
 
   constructor(
-    private eventService: EventService
+    private router: Router,
+    private eventService: EventService,
+    private dataService: DataService
   ) { }
 
   async ngOnInit() {
