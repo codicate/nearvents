@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import User from '../../models/user.model';
 import { EventService } from 'services/event.service';
+import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -10,12 +10,16 @@ import { EventService } from 'services/event.service';
 export class LeaderboardPage implements OnInit {
   players = [];
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private authService: AuthService
+  ) {}
 
   async ngOnInit() {
-    this.players = await this.eventService.getAllPlayers();
-    console.log(this.players);
-    this.players.sort((a, b) => b.points - a.points);
+    this.authService.subscribeToUserUpdates(async () => {
+      this.players = await this.eventService.getAllPlayers();
+      this.players.sort((a, b) => b.points - a.points);
+    });
   }
 
   async doRefresh(event) {
@@ -23,6 +27,6 @@ export class LeaderboardPage implements OnInit {
     this.players.sort((a, b) => b.points - a.points);
     event.target.complete();
   }
-  
+
   onStart() {}
 }
