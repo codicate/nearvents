@@ -21,9 +21,7 @@ export class InfoPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router,
-    private firestore: Firestore,
-    private cameraService: CameraService
+    private router: Router
   ) {}
 
   get name() {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
 import Event from 'models/event.model';
 import { Router, RouterModule } from '@angular/router';
-import { dataService } from '../../services/data.service';
+import { DataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -17,32 +17,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./eventpage.page.scss'],
 })
 export class EventpagePage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
   pageEvent: Event;
   upload = false;
   user = null;
   orderby: string;
   userID: string;
-  
-
-  getPlayerAvatar(playerId: string) {
-    for (let i = 0; i < this.dataService.playerArray.length; i++) {
-      if (this.dataService.playerArray[i].playerID == playerId) {
-        return this.dataService.playerArray[i].picture;
-      }
-    }
-  }
-
-  getPlayerName(playerName: string) {
-    for (let i = 0; i < this.dataService.playerArray.length; i++) {
-      if (this.dataService.playerArray[i].playerID == playerName) {
-        return this.dataService.playerArray[i].name;
-      }
-    }
-  }
-
-  @ViewChild(IonModal) modal: IonModal;
-
   name: string;
+
+  constructor(
+    public dataService: DataService,
+    private route: ActivatedRoute,
+    private loadingController: LoadingController,
+    private cameraService: CameraService,
+    private alertController: AlertController,
+    private authService: AuthService
+  ) {}
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
@@ -56,47 +46,8 @@ export class EventpagePage implements OnInit {
     const ev = event;
   }
 
-  // async takePicture() {
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: false,
-  //     resultType: CameraResultType.Base64,
-  //     source: CameraSource.Camera, // Camera, Photos or Prompt!
-  //   });
-
-  //   if (image) {
-  //     const loading = await this.loadingController.create();
-  //     await loading.present();
-
-  //     const result = await this.cameraService.uploadImage(image);
-  //     loading.dismiss();
-  //     this.upload = true;
-
-  //     if (!result) {
-  //       const alert = await this.alertController.create({
-  //         header: 'Upload failed',
-  //         message: 'There was a problem uploading your picture.',
-  //         buttons: ['OK'],
-  //       });
-  //       await alert.present();
-  //     }
-  //   }
-  // }
-
-  constructor(
-    private route: ActivatedRoute,
-    public dataService: dataService,
-    private loadingController: LoadingController,
-    private cameraService: CameraService,
-    private alertController: AlertController,
-    private authService: AuthService
-  ) {}
-
   ngOnInit() {
-    this.dataService.getID.subscribe(
-      (message) => (this.userID = message)
-    );
-    console.log("The user id is", this.userID)
+    this.dataService.getID.subscribe((message) => (this.userID = message));
+    console.log('The user id is', this.userID);
   }
-  }
-
+}

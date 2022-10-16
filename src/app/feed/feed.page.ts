@@ -4,11 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { Geolocation } from '@capacitor/geolocation';
 import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
 import { EventService } from 'services/event.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dataService } from 'services/data.service';
+import { DataService } from 'services/data.service';
 
 @Component({
   selector: 'app-feed',
@@ -23,7 +24,7 @@ export class FeedPage implements OnInit {
   image = null;
 
   constructor(
-    private dataService: dataService,
+    private dataService: DataService,
     private fb: FormBuilder,
     private router: Router,
     private loadingController: LoadingController,
@@ -35,10 +36,6 @@ export class FeedPage implements OnInit {
     return this.credentials.get('name');
   }
 
-  get location() {
-    return this.credentials.get('location');
-  }
-
   get description() {
     return this.credentials.get('description');
   }
@@ -46,7 +43,6 @@ export class FeedPage implements OnInit {
   async ngOnInit() {
     this.credentials = this.fb.group({
       name: ['', [Validators.required]],
-      location: ['', [Validators.required]],
       description: ['', [Validators.required]],
     });
     this.authService.getCurrentUser().subscribe((user) => {
@@ -90,15 +86,19 @@ export class FeedPage implements OnInit {
       const loading = await this.loadingController.create();
       await loading.present();
 
+      const coordinates = await Geolocation.getCurrentPosition();
+      console.log(coordinates);
       const result = await this.eventService.createEvent(
         this.image,
         this.user.id,
         this.name,
-        this.location,
+        [coordinates.coords.latitude, coordinates.coords.longitude],
         this.description
       );
       await loading.dismiss();
 
+      this.image = null;
+      this.credentials.reset();
       this.modal.dismiss(null, 'cancel');
     }
   }

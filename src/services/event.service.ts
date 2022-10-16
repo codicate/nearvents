@@ -58,7 +58,16 @@ export class EventService {
     }
   }
 
-  async createEvent(rawImage, creatorPlayerID, name, location, description) {
+  async getEvent(id) {
+    try {
+      const event = await getDoc(doc(this.firestore, 'events', id));
+      return event;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async createEvent(rawImage, creatorPlayerID, name, coordinates, description) {
     try {
       const image = await this.cameraService.uploadImage(
         rawImage,
@@ -66,7 +75,7 @@ export class EventService {
       );
       await addDoc(collection(this.firestore, 'events'), {
         name: name.value,
-        location: location.value,
+        location: coordinates,
         description: description.value,
         banner: image,
         imageArray: [],
