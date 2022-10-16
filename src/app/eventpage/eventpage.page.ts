@@ -25,6 +25,7 @@ export class EventpagePage implements OnInit {
   name: string;
   event = null;
   blur = true;
+  eventCreatorID = '';
 
   constructor(
     private router: Router,
@@ -41,6 +42,7 @@ export class EventpagePage implements OnInit {
     this.dataService.getID.subscribe(async (message) => {
       const user = await this.authService.getCurrentUser();
       if (message) {
+        this.eventCreatorID = message;
         if (message === user.id || user.events?.includes(message)) {
           this.blur = false;
         }
@@ -86,6 +88,7 @@ export class EventpagePage implements OnInit {
 
     if (success) {
       this.blur = false;
+      this.event = await this.eventService.getEvent(this.eventCreatorID);
     }
     await loading.dismiss();
   }

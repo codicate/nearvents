@@ -97,6 +97,7 @@ export class EventService {
           createdAt: Timestamp.now(),
         });
 
+        console.log('not adding to event', player);
         player.events.push(creatorPlayerID);
         player.images.push(image);
         player.points -= 100;
