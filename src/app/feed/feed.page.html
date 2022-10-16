@@ -25,18 +25,7 @@
       <div class="image-container">
         <img class="banner" [src]="event.banner" />
       </div>
-
-      <!-- <ion-card>
-
-    <ion-card-title id="cardTitle"> {{ event.name }} </ion-card-title>
-
-    <ion-card-subtitle>
-      {{ dataService.getPlayerName(event.creatorPlayerID) }}
       
-    </ion-card-subtitle>
-
-    <ion-card-content> {{ event.description }} </ion-card-content>
-  </ion-card> -->
     </div>
   </div>
 
@@ -62,13 +51,15 @@
             <p>Create an event</p>
             <ion-buttons
               slot="end"
-              *ngIf="!image"
               type="button"
               expand="block"
-              (click)="takePicture()"
               class="createButton"
             >
-              <ion-chip>Create</ion-chip>
+              <ion-chip type="submit"
+              [disabled]="!credentials.valid || !image"
+              class="main"
+              expand="block">Create</ion-chip>
+              
             </ion-buttons>
           </div>
         </ion-toolbar>

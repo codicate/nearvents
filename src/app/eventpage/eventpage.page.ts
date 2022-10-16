@@ -23,23 +23,6 @@ export class EventpagePage implements OnInit {
   orderby: string;
   userID: string;
   
-
-  getPlayerAvatar(playerId: string) {
-    for (let i = 0; i < this.dataService.playerArray.length; i++) {
-      if (this.dataService.playerArray[i].playerID == playerId) {
-        return this.dataService.playerArray[i].picture;
-      }
-    }
-  }
-
-  getPlayerName(playerName: string) {
-    for (let i = 0; i < this.dataService.playerArray.length; i++) {
-      if (this.dataService.playerArray[i].playerID == playerName) {
-        return this.dataService.playerArray[i].name;
-      }
-    }
-  }
-
   @ViewChild(IonModal) modal: IonModal;
 
   name: string;
@@ -55,33 +38,6 @@ export class EventpagePage implements OnInit {
   onWillDismiss(event: Event) {
     const ev = event;
   }
-
-  // async takePicture() {
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: false,
-  //     resultType: CameraResultType.Base64,
-  //     source: CameraSource.Camera, // Camera, Photos or Prompt!
-  //   });
-
-  //   if (image) {
-  //     const loading = await this.loadingController.create();
-  //     await loading.present();
-
-  //     const result = await this.cameraService.uploadImage(image);
-  //     loading.dismiss();
-  //     this.upload = true;
-
-  //     if (!result) {
-  //       const alert = await this.alertController.create({
-  //         header: 'Upload failed',
-  //         message: 'There was a problem uploading your picture.',
-  //         buttons: ['OK'],
-  //       });
-  //       await alert.present();
-  //     }
-  //   }
-  // }
 
   constructor(
     private route: ActivatedRoute,
