@@ -9,6 +9,8 @@ import {
   addDoc,
   query,
   where,
+  setDoc,
+  Timestamp,
 } from '@angular/fire/firestore';
 import { CameraService } from './camera.service';
 
@@ -45,13 +47,14 @@ export class EventService {
       const eventsSnapshot = await getDocs(
         collection(this.firestore, 'events')
       );
-      const events = eventsSnapshot.docs.map((d) => d.data());
-      await Promise.all(
-        events.map(async (e) => {
+      const eventsData = eventsSnapshot.docs.map((d) => d.data());
+      const events = await Promise.all(
+        eventsData.map(async (e) => {
           const creator = await this.getPlayer(e.creatorPlayerID);
-          e.creator = creator.data();
+          return { ...e, creator: creator.data() };
         })
       );
+      events.sort((a: any, b: any) => b.createdAt - a.createdAt);
       return events;
     } catch (e) {
       console.error(e);
@@ -76,19 +79,20 @@ export class EventService {
     }
   }
 
-  async createEvent(rawImage, creatorPlayerID, name, coordinates, description) {
+  async createEvent(creatorPlayerID, rawImage, name, coordinates, description) {
     try {
       const image = await this.cameraService.uploadImage(
         rawImage,
         'event/' + creatorPlayerID
       );
-      await addDoc(collection(this.firestore, 'events'), {
+      await setDoc(doc(this.firestore, 'events', creatorPlayerID), {
         name: name.value,
         location: coordinates,
         description: description.value,
         banner: image,
         imageArray: [],
         creatorPlayerID,
+        createdAt: Timestamp.now(),
       });
     } catch (e) {
       console.error(e);

@@ -89,12 +89,14 @@ export class FeedPage implements OnInit {
       const coordinates = await Geolocation.getCurrentPosition();
       console.log(coordinates);
       const result = await this.eventService.createEvent(
-        this.image,
         this.user.id,
+        this.image,
         this.name,
         [coordinates.coords.latitude, coordinates.coords.longitude],
         this.description
       );
+
+      this.events = await this.eventService.getAllEvents();
       await loading.dismiss();
 
       this.image = null;

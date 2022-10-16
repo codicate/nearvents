@@ -25,7 +25,6 @@
       <div class="image-container">
         <img class="banner" [src]="event.banner" />
       </div>
-      
     </div>
   </div>
 
@@ -55,11 +54,13 @@
               expand="block"
               class="createButton"
             >
-              <ion-chip type="submit"
-              [disabled]="!credentials.valid || !image"
-              class="main"
-              expand="block">Create</ion-chip>
-              
+              <ion-chip
+                type="submit"
+                [disabled]="!credentials.valid || !image"
+                class="main"
+                expand="block"
+                >Create</ion-chip
+              >
             </ion-buttons>
           </div>
         </ion-toolbar>
