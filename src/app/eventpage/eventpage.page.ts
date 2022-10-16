@@ -41,7 +41,7 @@ export class EventpagePage implements OnInit {
     this.dataService.getID.subscribe(async (message) => {
       const user = await this.authService.getCurrentUser();
       if (message) {
-        if (message === user.id || user.events.includes(message)) {
+        if (message === user.id || user.events?.includes(message)) {
           this.blur = false;
         }
 
