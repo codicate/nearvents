@@ -1,6 +1,22 @@
 <ion-content>
-  <ion-item> Hi {{user?.name}}! </ion-item>
-  <ion-button type="button" expand="block" (click)="signOut()"
-    >Sign Out</ion-button
-  >
+  <h1 style="text-align:center;"><strong>{{ user?.name }}</strong></h1>
+
+			<div class="profile-stats">
+				<ul>
+          <li><span class="profile-stat-count">{{ user?.points }}</span>Coins</li>
+					<li><span class="profile-stat-count">{{ user?.images.length }}</span>Photos</li>
+				</ul>
+			</div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col offset-4>
+            <div><img src="https://i.imgur.com/nVZNp9e.jpg"></div>
+          </ion-col>
+          <ion-col>
+            <div><img src="https://i.imgur.com/nVZNp9e.jpg"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
 </ion-content>

@@ -85,35 +85,27 @@
               >Description is invalid</ion-note
             >
           </ion-item>
-
-          <ion-button
-            *ngIf="!image"
-            type="button"
-            expand="block"
-            (click)="takePicture()"
-          >
-            Take a picture of what's around you!
-            <ion-icon
-              name="cloud-upload-outline"
-              class="ion-padding-start"
-            ></ion-icon>
-          </ion-button>
+          <ion-button 
+          expand="block"
+          color="warning" 
+          fill="outline"
+          *ngIf="!image"
+          (click)="takePicture()" >
+          Take a picture!          
+          <ion-icon 
+          slot="end" 
+          name="camera-outline">
+        </ion-icon>
+      </ion-button>
+        <hr>
           <ion-button
             *ngIf="image"
             type="button"
             color="success"
             expand="block"
+            fill="outline"
           >
             Picture Uploaded!
-          </ion-button>
-          <ion-button
-            *ngIf="image"
-            type="button"
-            color="warning"
-            expand="block"
-            (click)="takePicture()"
-          >
-            Upload a different picture
           </ion-button>
           <ion-button
             type="submit"
@@ -123,7 +115,7 @@
             expand="block"
           >
             Save Event
-            <ion-icon name="enter-outline" size="large"></ion-icon>
+            <ion-icon name="enter-outline" size="large" slot="end"></ion-icon>
           </ion-button>
         </form>
       </ion-content>
