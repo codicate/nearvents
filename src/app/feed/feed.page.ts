@@ -8,6 +8,7 @@ import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
 import { EventService } from 'services/event.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { dataService } from 'services/data.service';
 
 @Component({
   selector: 'app-feed',
@@ -22,6 +23,7 @@ export class FeedPage implements OnInit {
   image = null;
 
   constructor(
+    private dataService: dataService,
     private fb: FormBuilder,
     private router: Router,
     private loadingController: LoadingController,
@@ -58,6 +60,7 @@ export class FeedPage implements OnInit {
     this.router.navigateByUrl('tabs/tabs/eventpage/' + id, {
       replaceUrl: true,
     });
+    this.dataService.getCurrentID(id);
   }
 
   cancel() {

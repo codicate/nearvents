@@ -9,6 +9,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-eventpage',
@@ -19,6 +20,9 @@ export class EventpagePage implements OnInit {
   pageEvent: Event;
   upload = false;
   user = null;
+  orderby: string;
+  userID: string;
+  
 
   getPlayerAvatar(playerId: string) {
     for (let i = 0; i < this.dataService.playerArray.length; i++) {
@@ -80,6 +84,7 @@ export class EventpagePage implements OnInit {
   // }
 
   constructor(
+    private route: ActivatedRoute,
     public dataService: dataService,
     private loadingController: LoadingController,
     private cameraService: CameraService,
@@ -88,11 +93,10 @@ export class EventpagePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dataService.getPageEvent.subscribe(
-      (message) => (this.pageEvent = message)
+    this.dataService.getID.subscribe(
+      (message) => (this.userID = message)
     );
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.user = user;
-    });
+    console.log("The user id is", this.userID)
   }
-}
+  }
+
