@@ -66,9 +66,11 @@ export class EventpagePage implements OnInit {
       replaceUrl: true,
     });
   }
-  
 
   async takePicture() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
@@ -85,5 +87,6 @@ export class EventpagePage implements OnInit {
     if (success) {
       this.blur = false;
     }
+    await loading.dismiss();
   }
 }
