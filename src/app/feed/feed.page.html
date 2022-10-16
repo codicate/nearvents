@@ -1,36 +1,30 @@
 <ion-content [scrollEvents]="true">
   <h1 id="topHeading"><strong>Events near Rochester, NY</strong></h1>
 
-  <div
-    (click)="onEventClick()"
-    (click)="dataService.sendPageEvent(event)"
-    *ngFor="let event of eventArray; 
-    index as i"
-  >
-    <ion-row>
-      <ion-avatar class="ion-avatar">
-        <img
-          src="{{ dataService.getPlayerPicture(event.creatorPlayerID) }}"
-          id="image"
-        />
-        <img id="image" />
-      </ion-avatar>
-      <div class="eventDetails">
-        <p><strong>{{ event.name }}</strong></p>
-        <p style="font-size: 75%">
-          <strong
-            >By {{ dataService.getPlayerName(event.creatorPlayerID) }}</strong
-          >
-        </p>
+  <div *ngIf="events.length > 0">
+    <div
+      (click)="onEventClick(event.id)"
+      *ngFor="let event of events; let i = index"
+    >
+      <ion-row>
+        <ion-avatar class="ion-avatar">
+          <img src="{{ event.creator.picture }}" id="image" />
+          <img id="image" />
+        </ion-avatar>
+        <div class="eventDetails">
+          <p><strong>{{ event.name }}</strong></p>
+          <p style="font-size: 75%">
+            <strong>By {{ event.creator.name }}</strong>
+          </p>
+        </div>
+      </ion-row>
+
+      <div class="image-container">
+        <img id="banner" [src]="event.banner" />
       </div>
-    </ion-row>
 
-    <div class="image-container">
-      <img id="banner" [src]="event.banner" />
-    </div>
+      <!-- <ion-card>
 
-    <!-- <ion-card>
-   
     <ion-card-title id="cardTitle"> {{ event.name }} </ion-card-title>
 
     <ion-card-subtitle>
@@ -40,6 +34,7 @@
 
     <ion-card-content> {{ event.description }} </ion-card-content>
   </ion-card> -->
+    </div>
   </div>
 
   <ion-fab
@@ -53,7 +48,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-modal trigger="opens" (willDismiss)="onWillDismiss($event)">
+  <ion-modal trigger="opens">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -64,34 +59,41 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="floating" color="warning"
-            >Enter your event name</ion-label
-          >
-          <ion-input
-            [(ngModel)]="userEventName"
-            type="text"
-            placeholder="Event Name"
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating" color="warning"
-            >Enter your location</ion-label
-          >
-          <ion-input
-            [(ngModel)]="userEventLocation"
-            type="text"
-            placeholder="Event location"
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating" color="warning">Description</ion-label>
-          <ion-input
-            [(ngModel)]="userEventDescription"
-            type="text"
-            placeholder="Write a short description"
-          ></ion-input>
-        </ion-item>
+        <form (ngSubmit)="createEvent()" [formGroup]="credentials">
+          <ion-item fill="solid" class="ion-margin-bottom">
+            <ion-input
+              placeholder="Event Name"
+              formControlName="name"
+            ></ion-input>
+            <ion-note
+              slot="error"
+              *ngIf="(name.dirty || name.touched) && name.errors"
+              >Name is invalid</ion-note
+            >
+          </ion-item>
+          <ion-item fill="solid" class="ion-margin-bottom">
+            <ion-input
+              placeholder="Event Location"
+              formControlName="location"
+            ></ion-input>
+            <ion-note
+              slot="error"
+              *ngIf="(location.dirty || location.touched) && location.errors"
+              >Location is invalid</ion-note
+            >
+          </ion-item>
+          <ion-item fill="solid" class="ion-margin-bottom">
+            <ion-input
+              placeholder="Event description"
+              formControlName="Description"
+            ></ion-input>
+            <ion-note
+              slot="error"
+              *ngIf="(description.dirty || description.touched) && description.errors"
+              >Description is invalid</ion-note
+            >
+          </ion-item>
+        </form>
         <ion-button
           *ngIf="!upload"
           type="button"
@@ -114,7 +116,7 @@
       </ion-content>
       <ion-button
         (click)="confirm()"
-        (click)="submitUserEvent()"
+        (click)="createEvent()"
         class="main"
         color="warning"
         expand="block"

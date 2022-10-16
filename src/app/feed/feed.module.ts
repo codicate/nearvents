@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,15 +8,14 @@ import { FeedPageRoutingModule } from './feed-routing.module';
 
 import { FeedPage } from './feed.page';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FeedPageRoutingModule
+    FeedPageRoutingModule,
+    ReactiveFormsModule,
   ],
-  declarations: [FeedPage]
+  declarations: [FeedPage],
 })
 export class FeedPageModule {}

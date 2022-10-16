@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { stringLength } from '@firebase/util';
 import Event from '../../models/event.model';
 import { Router, RouterModule } from '@angular/router';
-import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { EventService } from 'services/event.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-feed',
@@ -16,47 +15,62 @@ import { AlertController, LoadingController } from '@ionic/angular';
   styleUrls: ['./feed.page.scss'],
 })
 export class FeedPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
+  credentials: FormGroup;
   user = null;
-  eventArray: Event[] = [];
+  events = [];
   upload = false;
-
   userEventName: string;
   userEventDescription: string;
   userEventLocation: string;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
-    public dataService: dataService,
     private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
-    private cameraService: CameraService
+    private cameraService: CameraService,
+    private eventService: EventService
   ) {}
 
-  ngOnInit() {
-    this.dataService.getEvents.subscribe(
-      (message) => (this.eventArray = message)
-    );
+  get name() {
+    return this.credentials.get('name');
+  }
+
+  get location() {
+    return this.credentials.get('location');
+  }
+
+  get description() {
+    return this.credentials.get('description');
+  }
+
+  async ngOnInit() {
+    this.credentials = this.fb.group({
+      name: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+    });
     this.authService.getCurrentUser().subscribe((user) => {
       this.user = user;
     });
+    this.events = await this.eventService.getAllEvents();
   }
 
-  onEventClick() {
+  onEventClick(id) {
     console.log('Clicked');
-    this.router.navigateByUrl('tabs/tabs/eventpage', { replaceUrl: true });
+    this.router.navigateByUrl('tabs/tabs/eventpage/' + id, {
+      replaceUrl: true,
+    });
   }
-
-  @ViewChild(IonModal) modal: IonModal;
-
-  name: string;
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
 
   confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+    this.modal.dismiss('test what is this', 'confirm');
   }
 
   onWillDismiss(event: Event) {
@@ -90,29 +104,5 @@ export class FeedPage implements OnInit {
     }
   }
 
-  submitUserEvent() {
-    // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
-
-    this.dataService.eventArray.unshift(
-      new Event(
-        this.userEventName,
-        this.userEventLocation,
-        this.userEventDescription,
-        this.user.imageUrl,
-        [],
-        '202'
-      )
-    );
-
-    this.dataService.eventArray.unshift(
-      new Event(
-        this.userEventName,
-        this.userEventLocation,
-        this.userEventDescription,
-        this.user.imageUrl,
-        [],
-        '111'
-      )
-    );
-  }
+  createEvent() {}
 }
