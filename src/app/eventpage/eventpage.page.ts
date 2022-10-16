@@ -63,10 +63,11 @@ export class EventpagePage implements OnInit {
     this.modal.dismiss(this.name, 'confirm');
   }
 
-  goToMap() {
+  goToMap(event) {
     this.router.navigateByUrl('tabs/tabs/map', {
       replaceUrl: true,
     });
+    return event;
   }
 
   async takePicture() {
