@@ -36,18 +36,25 @@
       <ion-label slot="end"> {{ player.points }} </ion-label>
     </ion-item> -->
 
-  <ion-item *ngFor="let player of players; let i = index">
-    <ion-row>
+  <ion-item
+    *ngFor="let player of players; let i = index"
+    [class.c1]="i%5===0"
+    [class.c2]="i%5===1"
+    [class.c3]="i%5===2"
+    [class.c4]="i%5===3"
+    [class.c5]="i%5===4"
+  >
+    <div class="row">
+      <p><strong>{{i + 1}}</strong></p>
       <ion-avatar class="ion-avatar">
         <img src="{{ player.picture }}" id="image" />
       </ion-avatar>
-      <div class="eventDetails">
-        <p><strong>{{ player.name }}</strong></p>
-        <p style="font-size: 75%">
-          <strong>By {{player.points }}</strong>
-        </p>
+      <p style="font-size: 1.15rem"><strong>{{ player.name }}</strong></p>
+      <div>
+        <p>{{player?.points}}</p>
+        <p>🪙</p>
       </div>
-    </ion-row>
+    </div>
   </ion-item>
 
   <!-- </div> -->

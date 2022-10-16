@@ -1,5 +1,61 @@
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  margin: 0 1rem;
+  border-top: 1px solid #444;
+
+  & > :last-child {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    & > :last-child {
+      font-size: 1.25rem;
+      padding-bottom: 0.25rem;
+    }
+  }
+
+  & p {
+    margin: 0;
+  }
+}
+
 .ion-avatar {
   width: 4rem;
   height: 4rem;
   object-fit: contain;
+}
+
+.c1 {
+  & .ion-avatar {
+    border: 4px solid #ea047e;
+  }
+}
+
+.c2 {
+  & .ion-avatar {
+    border: 4px solid #ff6d28;
+  }
+}
+
+.c3 {
+  & .ion-avatar {
+    border: 4px solid #fce700;
+  }
+}
+
+.c4 {
+  & .ion-avatar {
+    border: 4px solid #06cad1;
+  }
+}
+
+.c5 {
+  & .ion-avatar {
+    border: 4px solid #38e54d;
+  }
 }
