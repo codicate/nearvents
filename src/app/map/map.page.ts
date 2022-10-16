@@ -44,6 +44,8 @@ export class MapPage implements AfterViewInit {
 
     const marker = new L.Marker([43.129064,-77.628996]);
     marker.addTo(this.map)
+    setTimeout(()=> { this.map.invalidateSize()}, 500);
+
   }
 
   constructor() { }
