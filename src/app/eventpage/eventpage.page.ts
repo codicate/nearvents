@@ -12,6 +12,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'services/event.service';
 
+
 @Component({
   selector: 'app-eventpage',
   templateUrl: './eventpage.page.html',
@@ -28,6 +29,7 @@ export class EventpagePage implements OnInit {
   event = null;
 
   constructor(
+    private router: Router,
     private eventService: EventService,
     public dataService: DataService,
     private route: ActivatedRoute,
@@ -45,13 +47,22 @@ export class EventpagePage implements OnInit {
     this.modal.dismiss(this.name, 'confirm');
   }
 
+  goToMap(){
+    this.router.navigateByUrl('tabs/tabs/map', {
+      replaceUrl: true,
+    });
+  }
+
   takePicture(){}
 
   async ngOnInit() {
-    this.dataService.getID.subscribe((message) => (this.userID = message));
+    this.dataService.getID.subscribe(async (message) => {
+      this.userID = message;
+      if(message) this.event = await this.eventService.getEvent(message);
+      console.log("event is", this.event)
+    });
     console.log('The user id is', this.userID);
     
-    this.event= await this.eventService.getEvent(this.userID);
-    console.log("event is", this.event)
+    
   }
 }

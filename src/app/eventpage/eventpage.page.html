@@ -1,16 +1,39 @@
-<ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons>
-        <ion-back-button>Back</ion-back-button>
-      </ion-buttons>
-      <ion-title style="text-align: center" >{{ event?.name }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-<!-- 
-  <ion-avatar>
-    <img src="{{ event.creator.picture }}" id="image" />
+<ion-content *ngIf="event">
+  
+  <!-- <ion-avatar>
+    <img src="{{ event.creator?.picture }}">
   </ion-avatar>
+
+  <div class="profile-stats">
+
+    <ul>
+      <li><span class="profile-stat-count">164</span> posts</li>
+      <li><span class="profile-stat-count">188</span> followers</li>
+      <li><span class="profile-stat-count">206</span> following</li>
+    </ul>
+
+  </div>
+ 
+  <h1 style="text-align:center;"><strong>{{ event?.name }}</strong></h1> -->
+
+  <h1 style="text-align:center;"><strong>{{ event?.name }}</strong></h1>
+
+			<div class="profile-stats">
+
+				<ul>
+					<li><span class="profile-stat-count">{{ event?.imageArray.length }}</span> Photos</li>
+					<li><span class="profile-stat-count">206</span> Favorites</li>
+          <li><ion-button (click)="goToMap()"><ion-icon name="navigate-outline"></ion-icon></ion-button></li>
+				</ul>
+
+			</div>
+
+			
+
+  
+  
+
+  
 
   <ion-fab
     vertical="bottom"
@@ -22,6 +45,13 @@
       <ion-icon name="camera-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+<!-- 
+  <ion-avatar>
+    <img src="{{ event.creator.picture }}" id="image" />
+  </ion-avatar>
+
+  
 
   <ion-modal trigger="open">
     <ng-template>
@@ -52,5 +82,5 @@
     </ng-template>
   </ion-modal>  -->
 
-  <image-feed></image-feed>
+  <image-feed class ="bg-image"></image-feed>
 </ion-content>
