@@ -76,6 +76,7 @@ export class SigninPage implements OnInit {
     if (user) {
       const snapshot = await getDoc(doc(this.firestore, `users/${user.uid}`));
       if (!snapshot.exists()) {
+        console.log('bro');
         this.router.navigateByUrl('info', { replaceUrl: true });
       } else {
         this.router.navigateByUrl('tabs/tabs/feed', { replaceUrl: true });

@@ -25,8 +25,6 @@ const routes: Routes = [
     path: 'info',
     loadChildren: () =>
       import('./info/info.module').then((m) => m.InfoPageModule),
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectLoggedInToItems },
   },
   {
     path: '**',
