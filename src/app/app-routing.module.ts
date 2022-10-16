@@ -6,8 +6,7 @@ import {
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToItems = () => redirectLoggedInTo(['tabs']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['']);
 
 const routes: Routes = [
   {
@@ -15,21 +14,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./signin/signin.module').then((m) => m.SigninPageModule),
     canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectLoggedInToItems },
   },
   {
     path: 'tabs',
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
     canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    data: { authGuardPipe: redirectLoggedInToItems },
   },
   {
     path: 'info',
     loadChildren: () =>
       import('./info/info.module').then((m) => m.InfoPageModule),
     canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    data: { authGuardPipe: redirectLoggedInToItems },
   },
   {
     path: '**',
