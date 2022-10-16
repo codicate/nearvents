@@ -1,21 +1,16 @@
-<!-- <ion-content>
+<ion-content>
   <ion-header>
     <ion-toolbar>
       <ion-buttons>
         <ion-back-button>Back</ion-back-button>
       </ion-buttons>
-      <ion-title style="text-align: center">{{ pageEvent.name }}</ion-title>
+      <ion-title *ngIf="userID!=null" style="text-align: center">{{ !event.name }}</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <img [src]="pageEvent.banner" />
-
+<!-- 
   <ion-avatar>
-    <img src="{{ getPlayerAvatar(pageEvent.creatorPlayerID) }}" id="image" />
+    <img src="{{ event.creator.picture }}" id="image" />
   </ion-avatar>
-
-  <p>Created by {{ getPlayerName(pageEvent.creatorPlayerID) }}</p>
-  <p>{{pageEvent.description }}</p>
 
   <ion-fab
     vertical="bottom"
@@ -28,7 +23,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-modal trigger="open" (willDismiss)="onWillDismiss($event)">
+  <ion-modal trigger="open">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -39,7 +34,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-          <ion-button *ngIf="!upload" type="button" expand="block" (click)="takePicture()" >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon></ion-button>           <img *ngIf="upload" [src]="user.imageUrl" />
+          <ion-button *ngIf="!upload" type="button" expand="block" (click)="takePicture()" >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon></ion-button>   
           <ion-button *ngIf="upload" type="button" color="warning" expand="block" (click)="takePicture()" >Upload a different one?</ion-button>
       </ion-content>
         <ion-button
@@ -55,7 +50,7 @@
       </ion-icon>
       </ion-button>
     </ng-template>
-  </ion-modal> 
+  </ion-modal>  -->
 
   <image-feed></image-feed>
-</ion-content> -->
+</ion-content>

@@ -49,17 +49,12 @@
               >
             </ion-buttons>
             <p>Create an event</p>
-            <ion-buttons
-              slot="end"
-              type="button"
-              expand="block"
-              class="createButton"
-            >
-              <ion-chip type="submit"
-              [disabled]="!credentials.valid || !image"
-              class="main"
-              expand="block">Create</ion-chip>
-              
+            <ion-buttons slot="end" size="large">
+              <ion-button
+                color="tertiary"
+                class="cancelButton"
+                ><h6>Info</h6></ion-button
+              >
             </ion-buttons>
           </div>
         </ion-toolbar>

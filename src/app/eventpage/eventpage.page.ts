@@ -10,6 +10,7 @@ import { AuthService } from 'services/auth.service';
 import { CameraService } from 'services/camera.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { EventService } from 'services/event.service';
 
 @Component({
   selector: 'app-eventpage',
@@ -22,10 +23,12 @@ export class EventpagePage implements OnInit {
   upload = false;
   user = null;
   orderby: string;
-  userID: string;
+  userID = null;
   name: string;
+  event = null;
 
   constructor(
+    private eventService: EventService,
     public dataService: DataService,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
@@ -42,12 +45,13 @@ export class EventpagePage implements OnInit {
     this.modal.dismiss(this.name, 'confirm');
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event;
-  }
+  takePicture(){}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.dataService.getID.subscribe((message) => (this.userID = message));
     console.log('The user id is', this.userID);
+    
+    this.event= await this.eventService.getEvent(this.userID);
+    console.log("event is", this.event)
   }
 }
