@@ -4,31 +4,76 @@
 
 #topHeading{
     padding-left: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 4%;
+    box-shadow: 0px 1px  #363431;
 }
 
 .image-container {
     display: flex;
     justify-content: center;
-    padding-bottom: 10%;
+    box-shadow: 0px 1px  #363431;
+  }
+
+  :root{
+    --ion-color-danger: #000000;
+	--ion-color-danger-rgb: 0,0,0;
+	--ion-color-danger-contrast: #ffffff;
+	--ion-color-danger-contrast-rgb: 255,255,255;
+	--ion-color-danger-shade: #000000;
+	--ion-color-danger-tint: #1a1a1a;
   }
 
 .ion-avatar{
     width: 15%;
     height: 15%;
-    padding-left: 5%;
+}
+
+.ionTitle{
+    padding-left:17.5%;
+}
+
+
+.createButton{
+    padding-right:2.5%;
+}
+
+.cancelButton{
+    padding-bottom: 5%;
+    text-align:center
+}
+
+ion-chip{
+  --background: #4895e2;
+  --color: #f6f6f6;
 }
 
 .item-divide{
-    --ion-grid-width: 1%;
+    --ion-grid-width: 5%;
+}
+
+.event-main {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 1rem ;
+    padding-top: 15px;
+    // padding-bottom: 5px;
+    gap: 1rem;
+
+    &>:last-child {
+        margin-left: auto;
+        padding-right: 2.5%;
+        font-size: large;
+    }
+}
+
+.banner{
+    padding-bottom: 25px;
 }
 
 
 .eventDetails{
     display: flex;
     flex-direction: column;
-    padding-left: 5%;
-    padding-top: 0.5%;
     gap: 2px;
 
     &>p{

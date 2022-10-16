@@ -52,10 +52,19 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
+          <ion-buttons slot="start" size="large" >
+            <ion-button color="tertiary" (click)="cancel()" class="cancelButton"><h6>Cancel</h6></ion-button>
           </ion-buttons>
-          <ion-title>Create an event</ion-title>
+          <ion-title class="ionTitle">Create an event</ion-title>
+            <ion-buttons 
+            slot="end"
+            *ngIf="!upload"
+            type="button"
+           expand="block"
+           (click)="takePicture()"
+           class="createButton">
+              <ion-chip>Create</ion-chip>
+            </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
