@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import User from '../../models/user.model';
-import { dataService } from '../../services/data.service';
+import { EventService } from 'services/event.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -8,14 +8,14 @@ import { dataService } from '../../services/data.service';
   styleUrls: ['./leaderboard.page.scss'],
 })
 export class LeaderboardPage implements OnInit {
-  playerArray: User[] = [];
+  players = [];
 
-  constructor(private dataService: dataService) {}
+  constructor(private eventService: EventService) {}
 
-  ngOnInit() {
-    this.dataService.getPlayers.subscribe(
-      (message) => (this.playerArray = message)
-    );
+  async ngOnInit() {
+    this.players = await this.eventService.getAllPlayers();
+    console.log(this.players);
+    this.players.sort((a, b) => b.points - a.points);
   }
 
   onStart() {}
