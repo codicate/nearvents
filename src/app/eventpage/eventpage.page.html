@@ -24,7 +24,7 @@
         Photos
       </li>
       <li>
-        <ion-button (click)="goToMap()">
+        <ion-button (click)="goToMap(event)" color="warning">
           <ion-icon name="navigate-outline"></ion-icon
         ></ion-button>
       </li>
@@ -51,4 +51,10 @@
   </ion-card>
 
   <image-feed [class.bg-image]="blur"></image-feed>
+
+  <ion-fab style="margin-right:5%;margin-bottom:5%;" vertical="bottom" horizontal="end" slot="fixed" (click)="takePicture()" *ngIf="!blur">
+    <ion-fab-button id="opens" color="warning">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
