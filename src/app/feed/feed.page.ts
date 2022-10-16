@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
-import { event } from './event.model';
+import { event } from '../models/event.model';
 import { Router, RouterModule } from '@angular/router';
 import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
@@ -94,7 +94,9 @@ export class FeedPage implements OnInit {
   submitUserEvent() {
    // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
 
-  this.dataService.eventArray.unshift(new event(4, 1000, this.userEventName, this.userEventLocation, this.user.imageUrl, this.userEventDescription, []));
+
+  this.dataService.eventArray.unshift(new event(this.userEventName, this.userEventLocation, this.userEventDescription, this.user.imageUrl,  []));
+
   }
 
 

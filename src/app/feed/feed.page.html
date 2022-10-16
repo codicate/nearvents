@@ -6,19 +6,19 @@
     *ngFor="let event of eventArray; 
     index as i"
     color="warning" >
-    <img [src]="event.eventPicture" />
+    <img [src]="event.banner" />
 
    
-    <ion-card-title id="cardTitle"> {{ event.eventName }} </ion-card-title>
+    <ion-card-title id="cardTitle"> {{ event.name }} </ion-card-title>
 
     <ion-card-subtitle>
-      {{ dataService.getPlayerName(event.playerID) }}
+      
       <ion-avatar>
-        <img src="{{ dataService.getPlayerPicture( dataService.getPlayerName(event.playerID)) }}" id="image" />
+        <img id="image" />
       </ion-avatar>
     </ion-card-subtitle>
 
-    <ion-card-content> {{ event.eventDescription }} </ion-card-content>
+    <ion-card-content> {{ event.description }} </ion-card-content>
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="upload=false">

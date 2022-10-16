@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { event } from '../app/feed/event.model';
-import { player } from '../app/leaderboard/player.model';
-import { image } from '../app/image-feed/image.model';
+import { event } from '../app/models/event.model';
+import { player } from '../app/models/player.model';
+import { image } from '../app/models/image.model';
 
 import { AuthService } from 'services/auth.service';
 
@@ -19,13 +19,10 @@ export class dataService {
   ];
 
   eventArray: event[] = [
-    new event(1,100,"Dandyhacks 2022", "Rochester, NY", "https://i.imgur.com/0b1S9Ze.jpg", "Event Description",[]),
-    new event(2,200, "Bengaluru Marathon", "Bangalore Marathon", "https://i.imgur.com/Na5x4Fl.jpg", "Event Description",[]),
-    new event(3,300, "World Wrestling Championship", "Wuhan, China", "https://i.imgur.com/K08RkpX.jpg", "Event Description",[])
+    new event("Dandyhacks 2022","Rochester, NY","Welcome","",[]),
   ]
 
- currentEvent = new BehaviorSubject(new event(0,900,"TestEvent", "", "", "",[]));
- getPageEvent = this.currentEvent.asObservable();
+ currentEvent = new BehaviorSubject(new event("","","","", []));
 
  private events = new BehaviorSubject(this.eventArray);
  getEvents = this.events.asObservable();
@@ -50,7 +47,7 @@ export class dataService {
 getPlayerPicture(playerName: string) {
     for (let i = 0; i < this.playerArray.length; i++) {
       if (this.playerArray[i].name == playerName) {
-        return this.playerArray[i].profilePicture;
+        return this.playerArray[i].picture;
       }
     }
  }

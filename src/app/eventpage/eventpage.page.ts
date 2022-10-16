@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
-import { event } from 'app/feed/event.model';
+import { event } from 'app/models/event.model';
 import { Router, RouterModule } from '@angular/router';
 import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
@@ -23,7 +23,7 @@ export class EventpagePage implements OnInit {
   getPlayerAvatar(playerId: number) {
     for(let i = 0; i<this.dataService.playerArray.length;i++) {
       if(this.dataService.playerArray[i].playerID == playerId) {
-        return this.dataService.playerArray[i].profilePicture;
+        return this.dataService.playerArray[i].picture;
       }
     }
   }
@@ -87,7 +87,7 @@ export class EventpagePage implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    this.dataService.getPageEvent.subscribe(message => this.pageEvent = message);
+    //this.dataService.getPageEvent.subscribe(message => this.pageEvent = message);
     this.authService.getCurrentUser().subscribe((user) => {
       this.user = user;
     });
