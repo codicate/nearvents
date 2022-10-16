@@ -49,7 +49,7 @@ export class EventpagePage implements OnInit {
   }
 
   onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    const ev = event;
   }
 
   async takePicture() {

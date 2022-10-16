@@ -44,7 +44,7 @@ export class FeedPage implements OnInit {
 
   onEventClick() {
     console.log('Clicked');
-    this.router.navigateByUrl('tabs/eventpage', { replaceUrl: true });
+    this.router.navigateByUrl('tabs/tabs/eventpage', { replaceUrl: true });
   }
 
   @ViewChild(IonModal) modal: IonModal;
@@ -60,7 +60,7 @@ export class FeedPage implements OnInit {
   }
 
   onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    const ev = event;
   }
 
   async takePicture() {
