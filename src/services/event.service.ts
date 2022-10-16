@@ -36,7 +36,7 @@ export class EventService {
   async getPlayer(id) {
     try {
       const user = await getDoc(doc(this.firestore, 'users', id));
-      return user;
+      return user.data();
     } catch (e) {
       console.error(e);
     }
@@ -51,7 +51,7 @@ export class EventService {
       const events = await Promise.all(
         eventsData.map(async (e) => {
           const creator = await this.getPlayer(e.creatorPlayerID);
-          return { ...e, creator: creator.data() };
+          return { ...e, creator };
         })
       );
       events.sort((a: any, b: any) => b.createdAt - a.createdAt);
@@ -71,7 +71,7 @@ export class EventService {
 
       const event = querySnapshot.docs.map((d) => d.data())[0];
       const creator = await this.getPlayer(event.creatorPlayerID);
-      event.creator = creator.data();
+      event.creator = creator;
 
       return event;
     } catch (e) {
@@ -94,6 +94,27 @@ export class EventService {
         creatorPlayerID,
         createdAt: Timestamp.now(),
       });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async participateEvent(rawImage, creatorPlayerID, playerID) {
+    try {
+      const image = await this.cameraService.uploadImage(
+        rawImage,
+        'event/' + creatorPlayerID + '/' + playerID
+      );
+
+      const event = await this.getEvent(creatorPlayerID);
+      event.imageArray.push(image);
+      await setDoc(doc(this.firestore, 'events', creatorPlayerID), event);
+
+      const player = await this.getPlayer(playerID);
+      player.events.push(creatorPlayerID);
+      await setDoc(doc(this.firestore, 'users', playerID), player);
+
+      return true;
     } catch (e) {
       console.error(e);
     }
