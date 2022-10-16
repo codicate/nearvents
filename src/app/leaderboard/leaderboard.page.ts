@@ -18,5 +18,11 @@ export class LeaderboardPage implements OnInit {
     this.players.sort((a, b) => b.points - a.points);
   }
 
+  async doRefresh(event) {
+    this.players = await this.eventService.getAllPlayers();
+    this.players.sort((a, b) => b.points - a.points);
+    event.target.complete();
+  }
+  
   onStart() {}
 }
