@@ -17,20 +17,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FeedPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   credentials: FormGroup;
-  user = null;
   events = [];
-  upload = false;
-  userEventName: string;
-  userEventDescription: string;
-  userEventLocation: string;
+  user = null;
+  image = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private loadingController: LoadingController,
-    private alertController: AlertController,
     private authService: AuthService,
-    private cameraService: CameraService,
     private eventService: EventService
   ) {}
 
@@ -73,36 +68,35 @@ export class FeedPage implements OnInit {
     this.modal.dismiss('test what is this', 'confirm');
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event;
+  async doRefresh(event) {
+    this.events = await this.eventService.getAllEvents();
+    event.target.complete();
   }
 
   async takePicture() {
-    const image = await Camera.getPhoto({
+    this.image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera, // Camera, Photos or Prompt!
     });
+  }
 
-    if (image) {
+  async createEvent() {
+    if (this.image) {
       const loading = await this.loadingController.create();
       await loading.present();
 
-      const result = await this.cameraService.uploadImage(image);
-      loading.dismiss();
-      this.upload = true;
+      const result = await this.eventService.createEvent(
+        this.image,
+        this.user.id,
+        this.name,
+        this.location,
+        this.description
+      );
+      await loading.dismiss();
 
-      if (!result) {
-        const alert = await this.alertController.create({
-          header: 'Upload failed',
-          message: 'There was a problem uploading your picture.',
-          buttons: ['OK'],
-        });
-        await alert.present();
-      }
+      this.modal.dismiss(null, 'cancel');
     }
   }
-
-  createEvent() {}
 }

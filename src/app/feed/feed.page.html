@@ -1,4 +1,7 @@
 <ion-content [scrollEvents]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <h1 id="topHeading"><strong>Events near Rochester, NY</strong></h1>
 
   <div *ngIf="events.length > 0">
@@ -6,10 +9,9 @@
       (click)="onEventClick(event.id)"
       *ngFor="let event of events; let i = index"
     >
-      <ion-row>
+      <ion-row class="event-main">
         <ion-avatar class="ion-avatar">
           <img src="{{ event.creator.picture }}" id="image" />
-          <img id="image" />
         </ion-avatar>
         <div class="eventDetails">
           <p><strong>{{ event.name }}</strong></p>
@@ -17,10 +19,11 @@
             <strong>By {{ event.creator.name }}</strong>
           </p>
         </div>
+        <ion-icon name="ellipsis-vertical-outline" size="medium"></ion-icon>
       </ion-row>
 
       <div class="image-container">
-        <img id="banner" [src]="event.banner" />
+        <img class="banner" [src]="event.banner" />
       </div>
 
       <!-- <ion-card>
@@ -37,12 +40,7 @@
     </div>
   </div>
 
-  <ion-fab
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-    (click)="upload=false"
-  >
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="!image">
     <ion-fab-button id="opens" color="light">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
@@ -52,19 +50,27 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start" size="large" >
-            <ion-button color="tertiary" (click)="cancel()" class="cancelButton"><h6>Cancel</h6></ion-button>
-          </ion-buttons>
-          <ion-title class="ionTitle">Create an event</ion-title>
-            <ion-buttons 
-            slot="end"
-            *ngIf="!upload"
-            type="button"
-           expand="block"
-           (click)="takePicture()"
-           class="createButton">
+          <div class="toolbar">
+            <ion-buttons slot="start" size="large">
+              <ion-button
+                color="tertiary"
+                (click)="cancel()"
+                class="cancelButton"
+                ><h6>Cancel</h6></ion-button
+              >
+            </ion-buttons>
+            <p>Create an event</p>
+            <ion-buttons
+              slot="end"
+              *ngIf="!image"
+              type="button"
+              expand="block"
+              (click)="takePicture()"
+              class="createButton"
+            >
               <ion-chip>Create</ion-chip>
             </ion-buttons>
+          </div>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
@@ -94,7 +100,7 @@
           <ion-item fill="solid" class="ion-margin-bottom">
             <ion-input
               placeholder="Event description"
-              formControlName="Description"
+              formControlName="description"
             ></ion-input>
             <ion-note
               slot="error"
@@ -102,37 +108,48 @@
               >Description is invalid</ion-note
             >
           </ion-item>
+
+          <ion-button
+            *ngIf="!image"
+            type="button"
+            expand="block"
+            (click)="takePicture()"
+          >
+            Take a picture of what's around you!
+            <ion-icon
+              name="cloud-upload-outline"
+              class="ion-padding-start"
+            ></ion-icon>
+          </ion-button>
+          <ion-button
+            *ngIf="image"
+            type="button"
+            color="success"
+            expand="block"
+          >
+            Picture Uploaded!
+          </ion-button>
+          <ion-button
+            *ngIf="image"
+            type="button"
+            color="warning"
+            expand="block"
+            (click)="takePicture()"
+          >
+            Upload a different picture
+          </ion-button>
+          <ion-button
+            type="submit"
+            [disabled]="!credentials.valid || !image"
+            class="main"
+            color="warning"
+            expand="block"
+          >
+            Save Event
+            <ion-icon name="enter-outline" size="large"></ion-icon>
+          </ion-button>
         </form>
-        <ion-button
-          *ngIf="!upload"
-          type="button"
-          expand="block"
-          (click)="takePicture()"
-          >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon
-        ></ion-button>
-        <ion-button *ngIf="upload" type="button" color="success" expand="block"
-          >Picture Uploaded!</ion-button
-        >
-        <img *ngIf="upload" [src]="user.imageUrl" />
-        <ion-button
-          *ngIf="upload"
-          type="button"
-          color="warning"
-          expand="block"
-          (click)="takePicture()"
-          >Upload a different one?</ion-button
-        >
       </ion-content>
-      <ion-button
-        (click)="confirm()"
-        (click)="createEvent()"
-        class="main"
-        color="warning"
-        expand="block"
-      >
-        Save Event
-        <ion-icon name="enter-outline" size="large"> </ion-icon>
-      </ion-button>
     </ng-template>
   </ion-modal>
 </ion-content>

@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Auth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import {
   collection,
   doc,
@@ -17,12 +10,17 @@ import {
   setDoc,
   addDoc,
 } from '@angular/fire/firestore';
+import { CameraService } from './camera.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  constructor(private auth: Auth, private firestore: Firestore) {}
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private cameraService: CameraService
+  ) {}
 
   async getAllPlayers() {
     try {
@@ -48,19 +46,29 @@ export class EventService {
         collection(this.firestore, 'events')
       );
       const events = eventsSnapshot.docs.map((d) => d.data());
-      events.map(async (e) => {
-        const creator = await this.getPlayer(e.creatorPlayerID);
-        e.creator = creator.data();
-      });
+      await Promise.all(
+        events.map(async (e) => {
+          const creator = await this.getPlayer(e.creatorPlayerID);
+          e.creator = creator.data();
+        })
+      );
       return events;
     } catch (e) {
       console.error(e);
     }
   }
 
-  async createEvent(event) {
+  async createEvent(rawImage, creatorPlayerID, name, location, description) {
     try {
-      await addDoc(collection(this.firestore, 'events'), event);
+      const image = await this.cameraService.uploadImage(rawImage);
+      await addDoc(collection(this.firestore, 'events'), {
+        name: name.value,
+        location: location.value,
+        description: description.value,
+        banner: image,
+        imageArray: [],
+        creatorPlayerID,
+      });
     } catch (e) {
       console.error(e);
     }
