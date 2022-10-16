@@ -52,7 +52,7 @@ export class SigninPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('tabs/tabs/info', { replaceUrl: true });
+      this.router.navigateByUrl('info', { replaceUrl: true });
     } else {
       this.showAlert('Registration failed', 'Please try again!');
     }
@@ -82,7 +82,7 @@ export class SigninPage implements OnInit {
     if (user) {
       const snapshot = await getDoc(doc(this.firestore, `users/${user.uid}`));
       if (!snapshot.exists()) {
-        this.router.navigateByUrl('tabs/tabs/info', { replaceUrl: true });
+        this.router.navigateByUrl('info', { replaceUrl: true });
       } else {
         this.router.navigateByUrl('tabs/tabs/feed', { replaceUrl: true });
       }

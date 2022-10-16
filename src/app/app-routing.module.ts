@@ -23,13 +23,15 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
+    path: 'info',
+    loadChildren: () =>
+      import('./info/info.module').then((m) => m.InfoPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
-  },
-  {
-    path: 'info',
-    loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
   },
 ];
 @NgModule({

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Sign In</ion-title>
+    <ion-title>Create User Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,13 +9,16 @@
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input placeholder="Name" formControlName="name"></ion-input>
       <ion-note slot="error" *ngIf="(name.dirty || name.touched) && name.errors"
-        >Email is invalid</ion-note
+        >Name is invalid</ion-note
       >
     </ion-item>
     <ion-button type="button" expand="block" (click)="takePicture()"
-      >Take Picture</ion-button
+      >Choose Profile Picture</ion-button
     >
-    <ion-button type="submit" expand="block" [disabled]="!credentials.valid"
+    <ion-button
+      type="submit"
+      expand="block"
+      [disabled]="!credentials.valid || !image"
       >Create Account</ion-button
     >
   </form>

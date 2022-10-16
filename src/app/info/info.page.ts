@@ -32,7 +32,7 @@ export class InfoPage implements OnInit {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      name: ['', [Validators.required, Validators.name]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -41,7 +41,7 @@ export class InfoPage implements OnInit {
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Camera, // Camera, Photos or Prompt!
+      source: CameraSource.Prompt, // Camera, Photos or Prompt!
     });
   }
 
@@ -52,6 +52,8 @@ export class InfoPage implements OnInit {
 
       const result = await this.authService.createUser(this.image, this.name);
       await loading.dismiss();
+
+      this.router.navigateByUrl('tabs', { replaceUrl: true });
 
       // if (!result) {
       //   const alert = await this.alertController.create({

@@ -81,7 +81,7 @@ export class AuthService {
     return setDoc(userDocRef, {
       id: user.uid,
       email: user.email,
-      name,
+      name: name.value,
       points: 0,
       rank: 0,
       images: [],
