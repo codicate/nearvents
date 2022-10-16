@@ -1,3 +1,38 @@
 #cardTitle{
     text-align:center
 }
+
+#topHeading{
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10%;
+  }
+
+.ion-avatar{
+    width: 15%;
+    height: 15%;
+    padding-left: 5%;
+}
+
+.item-divide{
+    --ion-grid-width: 1%;
+}
+
+
+.eventDetails{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-top: 0.5%;
+    gap: 2px;
+
+    &>p{
+        margin: 0%;
+    }
+
+}

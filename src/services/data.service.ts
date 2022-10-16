@@ -18,17 +18,30 @@ export class dataService {
     new User("Henry Liu","https://i.imgur.com/b5e3WKH.jpg",3,"103",[],1000),
   ];
 
+<<<<<<< Updated upstream
   eventArray: Event[] = [
     new Event("Dandyhacks 2022","Rochester, NY","Welcome","https://i.imgur.com/5Fu6VcT.jpg",[],"101"),
     new Event("World Chess Championship","Berlin, Germany","Welcome","https://i.imgur.com/nYHosgL.jpg",[],"102"),
     new Event("FIFA World Cup","Moscow, Russia","Welcome","https://i.imgur.com/CzgIJ5Z.jpg",[],"103"),
+=======
+  eventArray: event[] = [
+    new event("Dandyhacks 2022","Rochester, NY","Welcome","https://i.imgur.com/nVZNp9e.jpg",[],"101"),
+    new event("World Chess Championship","Berlin, Germany","Welcome","https://i.imgur.com/sNYlHqA.jpg",[],"102"),
+    new event("FIFA World Cup","Moscow, Russia","Welcome","https://i.imgur.com/CzgIJ5Z.jpg",[],"103"),
+>>>>>>> Stashed changes
   ]
 
  imageArray: Image[] = [];
 
+<<<<<<< Updated upstream
  currentEvent = new BehaviorSubject(new Event("","","","", [],""));
   getPageEvent = this.currentEvent.asObservable();
 
+=======
+ currentEvent = new BehaviorSubject(new event("","","","", [],""));
+ getPageEvent = this.currentEvent.asObservable();
+ 
+>>>>>>> Stashed changes
 
   private events = new BehaviorSubject(this.eventArray);
   getEvents = this.events.asObservable();
