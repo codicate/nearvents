@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
   {
@@ -11,6 +14,7 @@ const routes: Routes = [
         path: 'feed',
         loadChildren: () =>
           import('../feed/feed.module').then((m) => m.FeedPageModule),
+        ...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: 'leaderboard',
@@ -18,6 +22,7 @@ const routes: Routes = [
           import('../leaderboard/leaderboard.module').then(
             (m) => m.LeaderboardPageModule
           ),
+        ...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: 'eventpage/:id',
@@ -25,23 +30,19 @@ const routes: Routes = [
           import('../eventpage/eventpage.module').then(
             (m) => m.EventpagePageModule
           ),
+        ...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: 'profile',
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfilePageModule),
+        ...canActivate(redirectUnauthorizedToLogin),
       },
       {
-        path: 'user-feed',
-        loadChildren: () =>
-          import('../user-feed/user-feed.module').then(
-            (m) => m.UserFeedPageModule
-          ),
-      },
-      {
-              path: 'map',
+        path: 'map',
         loadChildren: () =>
           import('../map/map.module').then((m) => m.MapPageModule),
+        ...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: '',
