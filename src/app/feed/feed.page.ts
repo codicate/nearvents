@@ -95,7 +95,7 @@ export class FeedPage implements OnInit {
    // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
 
 
-  this.dataService.eventArray.unshift(new event(this.userEventName, this.userEventLocation, this.userEventDescription, this.user.imageUrl,  []));
+  this.dataService.eventArray.unshift(new event(this.userEventName, this.userEventLocation, this.userEventDescription, this.user.imageUrl,  [],"202"));
 
   }
 

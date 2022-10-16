@@ -20,7 +20,7 @@ export class EventpagePage implements OnInit {
   upload: boolean = false;
   user = null;
 
-  getPlayerAvatar(playerId: number) {
+  getPlayerAvatar(playerId: string) {
     for(let i = 0; i<this.dataService.playerArray.length;i++) {
       if(this.dataService.playerArray[i].playerID == playerId) {
         return this.dataService.playerArray[i].picture;
@@ -28,7 +28,7 @@ export class EventpagePage implements OnInit {
     }
   }
 
-  getPlayerName(playerName: number) {
+  getPlayerName(playerName: string) {
     for(let i = 0; i<this.dataService.playerArray.length;i++) {
       if(this.dataService.playerArray[i].playerID == playerName) {
         return this.dataService.playerArray[i].name;
@@ -87,7 +87,7 @@ export class EventpagePage implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    //this.dataService.getPageEvent.subscribe(message => this.pageEvent = message);
+    this.dataService.getPageEvent.subscribe(message => this.pageEvent = message);
     this.authService.getCurrentUser().subscribe((user) => {
       this.user = user;
     });
