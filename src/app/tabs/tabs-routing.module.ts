@@ -8,13 +8,6 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'user-feed',
-        loadChildren: () =>
-          import('../user-feed/user-feed.module').then(
-            (m) => m.UserFeedPageModule
-          ),
-      },
-      {
         path: 'feed',
         loadChildren: () =>
           import('../feed/feed.module').then((m) => m.FeedPageModule),
@@ -37,6 +30,13 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfilePageModule),
+      },
+      {
+        path: 'user-feed',
+        loadChildren: () =>
+          import('../user-feed/user-feed.module').then(
+            (m) => m.UserFeedPageModule
+          ),
       },
       {
         path: '',
