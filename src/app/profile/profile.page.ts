@@ -34,4 +34,9 @@ export class ProfilePage implements OnInit {
 
     this.router.navigateByUrl('', { replaceUrl: true });
   }
+
+  async doRefresh(event) {
+    this.user = await this.authService.getCurrentUser();
+    event.target.complete();
+  }
 }

@@ -1,4 +1,7 @@
 <ion-content *ngIf="event">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!-- <ion-avatar>
     <img src="{{ event.creator?.picture }}">
   </ion-avatar>
@@ -52,7 +55,14 @@
 
   <image-feed [class.bg-image]="blur"></image-feed>
 
-  <ion-fab style="margin-right:5%;margin-bottom:5%;" vertical="bottom" horizontal="end" slot="fixed" (click)="takePicture()" *ngIf="!blur">
+  <ion-fab
+    style="margin-right: 5%; margin-bottom: 5%"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    (click)="takePicture()"
+    *ngIf="!blur"
+  >
     <ion-fab-button id="opens" color="warning">
       <ion-icon name="camera-outline"></ion-icon>
     </ion-fab-button>

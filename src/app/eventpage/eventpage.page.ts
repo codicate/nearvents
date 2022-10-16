@@ -93,4 +93,9 @@ export class EventpagePage implements OnInit {
     }
     await loading.dismiss();
   }
+
+  async doRefresh(event) {
+    this.event = await this.eventService.getEvent(this.eventCreatorID);
+    event.target.complete();
+  }
 }
