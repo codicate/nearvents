@@ -4,23 +4,23 @@ export default class User {
   name: string;
   picture: string;
   rank: number;
-  playerID: number;
+  playerID: string;
   imageArray: Image[];
   points: number;
 
   constructor(
-    playerID: number,
     name: string,
     picture: string,
     points: number,
     rank: number,
-    image: Image[]
+    image: Image[],
+    playerID: string
   ) {
-    this.playerID = playerID;
     this.name = name;
     this.picture = picture;
     this.points = points;
     this.rank = rank;
     this.imageArray = image;
+    this.playerID = playerID;
   }
 }

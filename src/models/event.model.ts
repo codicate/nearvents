@@ -7,18 +7,21 @@ export default class Event {
   description: string;
   banner: string;
   imageArray: Image[];
+  eventID: string;
 
   constructor(
     name: string,
     location: string,
     description: string,
     image: string,
-    imageArray: Image[]
+    imageArray: Image[],
+    eventID: string
   ) {
     this.name = name;
     this.location = location;
     this.description = description;
     this.banner = image;
     this.imageArray = imageArray;
+    this.eventID = eventID;
   }
 }
