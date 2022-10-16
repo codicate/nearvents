@@ -1,54 +1,57 @@
 <ion-content>
-  <h1 style="text-align:center;"><strong>{{ user?.name }}</strong></h1>
+  <h1 style="text-align: center">
+    <strong>Welcome, {{ user?.name }}!</strong>
+  </h1>
 
-			<div class="profile-stats">
-				<ul>
-          <li><span class="profile-stat-count">{{ user?.points }}</span>Coins</li>
-					<li><span class="profile-stat-count">{{ user?.images.length }}</span>Photos</li>
-				</ul>
-			</div>
+  <div class="profile-stats">
+    <ul>
+      <li><span class="profile-stat-count">{{ user?.points }}</span>Coins</li>
+      <li>
+        <span class="profile-stat-count">{{ user?.images.length }}</span>Photos
+      </li>
+    </ul>
+  </div>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col offset-4>
-            <div><img src="{{ user?.images[0] }}"></div>
-          </ion-col>
-          <ion-col>
-            <div><img src="{{ user?.images[1] }}"></div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col offset-4>
-            <div><img src="{{ user?.images[2] }}"></div>
-          </ion-col>
-          <ion-col>
-            <div><img src="{{ user?.images[3] }}"></div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col offset-4>
-            <div><img src="{{ user?.images[4] }}"></div>
-          </ion-col>
-          <ion-col>
-            <div><img src="{{ user?.images[5] }}"></div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col offset-4>
-            <div><img src="{{ user?.images[6] }}"></div>
-          </ion-col>
-          <ion-col>
-            <div><img src="{{ user?.images[7] }}"></div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col offset-4>
-            <div><img src="{{ user?.images[8] }}"></div>
-          </ion-col>
-          <ion-col>
-            <div><img src="{{ user?.images[9] }}"></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col offset-4>
+        <div><img src="{{ user?.images[0] }}" /></div>
+      </ion-col>
+      <ion-col>
+        <div><img src="{{ user?.images[1] }}" /></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-4>
+        <div><img src="{{ user?.images[2] }}" /></div>
+      </ion-col>
+      <ion-col>
+        <div><img src="{{ user?.images[3] }}" /></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-4>
+        <div><img src="{{ user?.images[4] }}" /></div>
+      </ion-col>
+      <ion-col>
+        <div><img src="{{ user?.images[5] }}" /></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-4>
+        <div><img src="{{ user?.images[6] }}" /></div>
+      </ion-col>
+      <ion-col>
+        <div><img src="{{ user?.images[7] }}" /></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-4>
+        <div><img src="{{ user?.images[8] }}" /></div>
+      </ion-col>
+      <ion-col>
+        <div><img src="{{ user?.images[9] }}" /></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
