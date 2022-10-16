@@ -70,6 +70,9 @@ export class dataService {
   currentEvent = new BehaviorSubject(new Event('', '', '', '', [], ''));
   getPageEvent = this.currentEvent.asObservable();
 
+  currentID = new BehaviorSubject("");
+  getID = this.currentID.asObservable();
+
   private events = new BehaviorSubject(this.eventArray);
   getEvents = this.events.asObservable();
 
@@ -103,6 +106,10 @@ export class dataService {
 
   getEvent(playerName: string) {
     return event;
+  }
+
+  getCurrentID(message: string){
+    this.currentID.next(message);
   }
 
   sendPageEvent(message: Event) {
