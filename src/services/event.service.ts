@@ -113,6 +113,8 @@ export class EventService {
       const player = await this.getPlayer(playerID);
       player.events.push(creatorPlayerID);
       await setDoc(doc(this.firestore, 'users', playerID), player);
+
+      return true;
     } catch (e) {
       console.error(e);
     }

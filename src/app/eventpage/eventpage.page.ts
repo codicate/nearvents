@@ -39,12 +39,13 @@ export class EventpagePage implements OnInit {
 
   async ngOnInit() {
     this.dataService.getID.subscribe(async (message) => {
+      const user = await this.authService.getCurrentUser();
       if (message) {
-        const ev = await this.eventService.getEvent(message);
-        const user = await this.authService.getCurrentUser();
-        if (ev.creatorPlayerID === user.id) {
+        if (message === user.id || user.events.includes(message)) {
           this.blur = false;
         }
+
+        const ev = await this.eventService.getEvent(message);
         this.user = user;
         this.event = ev;
         console.log(ev);
@@ -73,11 +74,15 @@ export class EventpagePage implements OnInit {
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera, // Camera, Photos or Prompt!
     });
-    const result = await this.eventService.participateEvent(
+
+    const success = await this.eventService.participateEvent(
       image,
       this.event.creatorPlayerID,
       this.user.id
     );
-    console.log(result);
+
+    if (success) {
+      this.blur = false;
+    }
   }
 }
