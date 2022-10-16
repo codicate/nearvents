@@ -27,6 +27,7 @@ export class EventpagePage implements OnInit {
   userID = null;
   name: string;
   event = null;
+  blur = true;
 
   constructor(
     private router: Router,

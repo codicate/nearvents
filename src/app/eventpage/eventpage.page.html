@@ -28,59 +28,18 @@
 
 			</div>
 
-			
+      <ion-card class="blur" *ngIf="blur">
+        <ion-card-header>
+          <ion-card-title ><ion-icon size="large" name="eye-off-outline"></ion-icon></ion-card-title>
+          <ion-card-title><strong>Hidden Content</strong></ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content class="mainCard">
+          <strong>Check-in with a photo upload yourself to discover some others!</strong>
+        </ion-card-content>
+        <ion-button color="warning" fill="outline" >Check-in <ion-icon slot="end" name="camera-outline"></ion-icon></ion-button>
+        <hr>
+      </ion-card>
 
-  
-  
-
-  
-
-  <ion-fab
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-    id="open"
-   >
-    <ion-fab-button id="open" color="light">
-      <ion-icon name="camera-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-<!-- 
-  <ion-avatar>
-    <img src="{{ event.creator.picture }}" id="image" />
-  </ion-avatar>
-
-  
-
-  <ion-modal trigger="open">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Upload your event image</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-          <ion-button *ngIf="!upload" type="button" expand="block" (click)="takePicture()" >Upload Picture <ion-icon name="cloud-upload-outline"></ion-icon></ion-button>   
-          <ion-button *ngIf="upload" type="button" color="warning" expand="block" (click)="takePicture()" >Upload a different one?</ion-button>
-      </ion-content>
-        <ion-button
-          (click)="confirm()"
-          class="main"
-          color="success"
-          expand = "block">
-          Save 
-       <ion-icon 
-          style="margin-left: 10px;"
-          name="save-outline"
-          size="small">
-      </ion-icon>
-      </ion-button>
-    </ng-template>
-  </ion-modal>  -->
-
-  <image-feed class ="bg-image"></image-feed>
+  <image-feed *ngIf="blur" class ="bg-image"></image-feed>
 </ion-content>
