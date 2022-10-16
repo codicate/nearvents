@@ -92,7 +92,7 @@ export class EventService {
           location: coordinates,
           description: description.value,
           banner: image,
-          imageArray: [],
+          imageArray: [image],
           creatorPlayerID,
           createdAt: Timestamp.now(),
         });

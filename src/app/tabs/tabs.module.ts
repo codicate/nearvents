@@ -1,7 +1,9 @@
-import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { provideAuth, getAuth, AuthModule } from '@angular/fire/auth';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
@@ -12,8 +14,11 @@ import { TabsPage } from './tabs.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    AuthModule,
+    provideAuth(() => getAuth()),
   ],
-  declarations: [TabsPage]
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  declarations: [TabsPage],
 })
 export class TabsPageModule {}
