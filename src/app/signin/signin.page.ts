@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'services/auth.service';
+import { doc, Firestore, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,8 @@ export class SigninPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private firestore: Firestore
   ) {}
 
   // Easy access for form fields
@@ -50,7 +52,7 @@ export class SigninPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('tabs', { replaceUrl: true });
+      this.router.navigateByUrl('tabs/tabs/info', { replaceUrl: true });
     } else {
       this.showAlert('Registration failed', 'Please try again!');
     }
@@ -64,7 +66,7 @@ export class SigninPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('tabs', { replaceUrl: true });
+      this.router.navigateByUrl('tabs/tabs/feed', { replaceUrl: true });
     } else {
       this.showAlert('Login failed', 'Please try again!');
     }
@@ -78,7 +80,12 @@ export class SigninPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('tabs', { replaceUrl: true });
+      const snapshot = await getDoc(doc(this.firestore, `users/${user.uid}`));
+      if (!snapshot.exists()) {
+        this.router.navigateByUrl('tabs/tabs/info', { replaceUrl: true });
+      } else {
+        this.router.navigateByUrl('tabs/tabs/feed', { replaceUrl: true });
+      }
     } else {
       this.showAlert('Login failed with Google failed', 'Please try again!');
     }

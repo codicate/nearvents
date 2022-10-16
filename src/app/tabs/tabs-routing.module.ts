@@ -10,7 +10,9 @@ const routes: Routes = [
       {
         path: 'user-feed',
         loadChildren: () =>
-          import('../user-feed/user-feed.module').then(m => m.UserFeedPageModule),
+          import('../user-feed/user-feed.module').then(
+            (m) => m.UserFeedPageModule
+          ),
       },
       {
         path: 'feed',
@@ -24,18 +26,28 @@ const routes: Routes = [
             (m) => m.LeaderboardPageModule
           ),
       },
-      // {
-      //   path: '',
-      //   redirectTo: 'tabs/feed',
-      //   pathMatch: 'full',
-      // },
       {
-        path: '',
+        path: 'eventpage',
         loadChildren: () =>
-          import('../eventpage/eventpage.module').then( 
+          import('../eventpage/eventpage.module').then(
             (m) => m.EventpagePageModule
           ),
-      }
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('../profile/profile.module').then((m) => m.ProfilePageModule),
+      },
+      {
+        path: 'info',
+        loadChildren: () =>
+          import('../info/info.module').then((m) => m.InfoPageModule),
+      },
+      {
+        path: '',
+        redirectTo: 'tabs/feed',
+        pathMatch: 'full',
+      },
     ],
   },
   {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { player } from '../models/player.model';
+import User from '../../models/user.model';
 import { dataService } from '../../services/data.service';
 
 @Component({
@@ -8,18 +8,15 @@ import { dataService } from '../../services/data.service';
   styleUrls: ['./leaderboard.page.scss'],
 })
 export class LeaderboardPage implements OnInit {
+  playerArray: User[] = [];
 
-  playerArray: player[] = [];
-
-  constructor(private dataService: dataService) {
-  }
+  constructor(private dataService: dataService) {}
 
   ngOnInit() {
-    this.dataService.getPlayers.subscribe(message => this.playerArray = message);
+    this.dataService.getPlayers.subscribe(
+      (message) => (this.playerArray = message)
+    );
   }
 
-  onStart(){
-    
-  }
-
+  onStart() {}
 }

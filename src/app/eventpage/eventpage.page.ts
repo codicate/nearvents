@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
-import { event } from 'app/models/event.model';
+import Event from 'models/event.model';
 import { Router, RouterModule } from '@angular/router';
 import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
@@ -16,21 +16,21 @@ import { AlertController, LoadingController } from '@ionic/angular';
   styleUrls: ['./eventpage.page.scss'],
 })
 export class EventpagePage implements OnInit {
-  pageEvent: event;
-  upload: boolean = false;
+  pageEvent: Event;
+  upload = false;
   user = null;
 
   getPlayerAvatar(playerId: number) {
-    for(let i = 0; i<this.dataService.playerArray.length;i++) {
-      if(this.dataService.playerArray[i].playerID == playerId) {
+    for (let i = 0; i < this.dataService.playerArray.length; i++) {
+      if (this.dataService.playerArray[i].playerID == playerId) {
         return this.dataService.playerArray[i].picture;
       }
     }
   }
 
   getPlayerName(playerName: number) {
-    for(let i = 0; i<this.dataService.playerArray.length;i++) {
-      if(this.dataService.playerArray[i].playerID == playerName) {
+    for (let i = 0; i < this.dataService.playerArray.length; i++) {
+      if (this.dataService.playerArray[i].playerID == playerName) {
         return this.dataService.playerArray[i].name;
       }
     }
@@ -49,7 +49,7 @@ export class EventpagePage implements OnInit {
   }
 
   onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    const ev = event;
   }
 
   async takePicture() {
@@ -84,7 +84,8 @@ export class EventpagePage implements OnInit {
     private loadingController: LoadingController,
     private cameraService: CameraService,
     private alertController: AlertController,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     //this.dataService.getPageEvent.subscribe(message => this.pageEvent = message);
@@ -92,5 +93,4 @@ export class EventpagePage implements OnInit {
       this.user = user;
     });
   }
-
 }

@@ -14,12 +14,17 @@ import {
   getDoc,
   setDoc,
 } from '@angular/fire/firestore';
+import { CameraService } from './camera.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, private firestore: Firestore) {}
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private cameraService: CameraService
+  ) {}
 
   async register({ email, password }) {
     try {
@@ -28,7 +33,6 @@ export class AuthService {
         email,
         password
       );
-      this.createUserDocument(user);
       return user;
     } catch (e) {
       console.error(e);
@@ -50,10 +54,6 @@ export class AuthService {
         this.auth,
         new GoogleAuthProvider()
       );
-      const snapshot = await getDoc(doc(this.firestore, `users/${user.uid}`));
-      if (!snapshot.exists()) {
-        this.createUserDocument(user);
-      }
       return user;
     } catch (e) {
       console.error(e);
@@ -74,13 +74,18 @@ export class AuthService {
     return docData(userDocRef, { idField: 'id' });
   }
 
-  private createUserDocument(user) {
+  async createUser(image, name) {
+    const user = this.auth.currentUser;
     const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    const picture = await this.cameraService.uploadImage(image);
     return setDoc(userDocRef, {
       id: user.uid,
       email: user.email,
-      // displayName: user.displayName,
-      // imageUrl: user.photoURL,
+      name,
+      points: 0,
+      rank: 0,
+      images: [],
+      picture,
     });
   }
 }

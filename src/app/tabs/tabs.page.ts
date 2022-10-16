@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
 })
-export class TabsPage {
-  user = {
-    name: 'He Liu',
-    point: '540',
-    avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/7/7b/Liu_He%2C_May_16%2C_2018.jpg',
-  };
+export class TabsPage implements OnInit {
+  user = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe((user) => {
+      this.user = user;
+      console.log('user', user);
+    });
+  }
 
   goToProfilePage() {
-    this.router.navigateByUrl('profile');
+    this.router.navigateByUrl('tabs/profile', { replaceUrl: true });
   }
 }

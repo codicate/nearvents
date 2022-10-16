@@ -23,25 +23,13 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'eventpage',
-    loadChildren: () =>
-      import('./eventpage/eventpage.module').then((m) => m.EventpagePageModule),
-    ...canActivate(redirectUnauthorizedToLogin),
-  },
-  {
-    path: 'profile',
-    loadChildren: () =>
-      import('./profile/profile.module').then((m) => m.ProfilePageModule),
-    ...canActivate(redirectUnauthorizedToLogin),
-  },
-  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
   },
   {
-    path: 'user-feed',
-    loadChildren: () => import('./user-feed/user-feed.module').then( m => m.UserFeedPageModule)
+    path: 'info',
+    loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
   },
 ];
 @NgModule({

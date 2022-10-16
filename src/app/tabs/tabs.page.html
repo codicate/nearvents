@@ -2,8 +2,12 @@
   <ion-header>
     <ion-toolbar>
       <div class="header">
-        <p>{{user.point}} Points</p>
-        <img src="{{user.avatar}}" class="avatar" (click)="goToProfilePage()" />
+        <p>{{user?.point}} Points</p>
+        <img
+          src="{{user?.avatar}}"
+          class="avatar"
+          (click)="goToProfilePage()"
+        />
       </div>
     </ion-toolbar>
   </ion-header>
@@ -11,17 +15,17 @@
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="user-feed">
       <ion-icon name="image-outline"></ion-icon>
-            <ion-label>My Photos</ion-label>
+      <ion-label>My Photos</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="feed">
       <ion-icon name="calendar-number-outline"></ion-icon>
-             <ion-label>Events</ion-label>
+      <ion-label>Events</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="leaderboard">
       <ion-icon name="podium-outline"></ion-icon>
-            <ion-label>Leaderboard</ion-label>
-        </ion-tab-button>
+      <ion-label>Leaderboard</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

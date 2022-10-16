@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { stringLength } from '@firebase/util';
-import { event } from '../models/event.model';
+import Event from '../../models/event.model';
 import { Router, RouterModule } from '@angular/router';
 import { dataService } from '../../services/data.service';
 import { IonModal } from '@ionic/angular';
@@ -17,32 +17,34 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class FeedPage implements OnInit {
   user = null;
-  eventArray: event[] = [];
-  upload: boolean = false;
-
+  eventArray: Event[] = [];
+  upload = false;
 
   userEventName: string;
   userEventDescription: string;
   userEventLocation: string;
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     public dataService: dataService,
     private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
     private cameraService: CameraService
-    ) {}
+  ) {}
 
   ngOnInit() {
-    this.dataService.getEvents.subscribe(message => this.eventArray = message);
+    this.dataService.getEvents.subscribe(
+      (message) => (this.eventArray = message)
+    );
     this.authService.getCurrentUser().subscribe((user) => {
       this.user = user;
     });
   }
 
-  onEventClick(){
-    console.log("Clicked");
-    this.router.navigate(['eventpage']);
+  onEventClick() {
+    console.log('Clicked');
+    this.router.navigateByUrl('tabs/eventpage', { replaceUrl: true });
   }
 
   @ViewChild(IonModal) modal: IonModal;
@@ -58,10 +60,8 @@ export class FeedPage implements OnInit {
   }
 
   onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    const ev = event;
   }
-
-
 
   async takePicture() {
     const image = await Camera.getPhoto({
@@ -90,14 +90,17 @@ export class FeedPage implements OnInit {
     }
   }
 
-
   submitUserEvent() {
-   // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
+    // this.dataService.eventArray.unshift(new event(this.dataService.playerArray[0].playerID ,this.userEventName, this.userEventLocation, this.user.author, this.user.imageUrl, this.userEventDescription));
 
-
-  this.dataService.eventArray.unshift(new event(this.userEventName, this.userEventLocation, this.userEventDescription, this.user.imageUrl,  []));
-
+    this.dataService.eventArray.unshift(
+      new Event(
+        this.userEventName,
+        this.userEventLocation,
+        this.userEventDescription,
+        this.user.imageUrl,
+        []
+      )
+    );
   }
-
-
 }
