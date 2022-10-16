@@ -81,19 +81,27 @@ export class EventService {
 
   async createEvent(creatorPlayerID, rawImage, name, coordinates, description) {
     try {
-      const image = await this.cameraService.uploadImage(
-        rawImage,
-        'event/' + creatorPlayerID
-      );
-      await setDoc(doc(this.firestore, 'events', creatorPlayerID), {
-        name: name.value,
-        location: coordinates,
-        description: description.value,
-        banner: image,
-        imageArray: [],
-        creatorPlayerID,
-        createdAt: Timestamp.now(),
-      });
+      const player = await this.getPlayer(creatorPlayerID);
+      if (player.points >= 100) {
+        const image = await this.cameraService.uploadImage(
+          rawImage,
+          'event/' + creatorPlayerID
+        );
+        await setDoc(doc(this.firestore, 'events', creatorPlayerID), {
+          name: name.value,
+          location: coordinates,
+          description: description.value,
+          banner: image,
+          imageArray: [],
+          creatorPlayerID,
+          createdAt: Timestamp.now(),
+        });
+
+        player.events.push(creatorPlayerID);
+        player.images.push(image);
+        player.points -= 100;
+        await setDoc(doc(this.firestore, 'users', creatorPlayerID), player);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -112,6 +120,8 @@ export class EventService {
 
       const player = await this.getPlayer(playerID);
       player.events.push(creatorPlayerID);
+      player.images.push(image);
+      player.points += 10;
       await setDoc(doc(this.firestore, 'users', playerID), player);
 
       return true;
