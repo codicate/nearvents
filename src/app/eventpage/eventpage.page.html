@@ -5,18 +5,18 @@
       <ion-buttons>
         <ion-back-button>Back</ion-back-button>
       </ion-buttons>  
-      <ion-title style="text-align:center">{{ pageEvent.eventName }}</ion-title>
+      <ion-title style="text-align:center">{{ pageEvent.name }}</ion-title>
     </ion-toolbar>
   </ion-header>
   
-  <img [src]="pageEvent.eventPicture">
+  <img [src]="pageEvent.banner">
 
   <ion-avatar>
-    <img src="{{ getPlayerAvatar(pageEvent.playerID) }}" id="image" />
+    <img src="{{ getPlayerAvatar(pageEvent.creatorPlayerID) }}" id="image" />
   </ion-avatar>
 
-  <p>Created by {{ getPlayerName(pageEvent.playerID) }}</p>
-  <p> {{pageEvent.eventDescription }}</p>
+  <p>Created by {{ getPlayerName(pageEvent.creatorPlayerID) }}</p>
+  <p> {{pageEvent.description }}</p>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="open" (click)="takePicture()">
     <ion-fab-button id="open" color="light">
