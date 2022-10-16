@@ -77,7 +77,10 @@ export class AuthService {
   async createUser(image, name) {
     const user = this.auth.currentUser;
     const userDocRef = doc(this.firestore, `users/${user.uid}`);
-    const picture = await this.cameraService.uploadImage(image);
+    const picture = await this.cameraService.uploadImage(
+      image,
+      'profile/' + user.uid
+    );
     return setDoc(userDocRef, {
       id: user.uid,
       email: user.email,

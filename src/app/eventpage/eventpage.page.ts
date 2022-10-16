@@ -52,32 +52,32 @@ export class EventpagePage implements OnInit {
     const ev = event;
   }
 
-  async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Camera, // Camera, Photos or Prompt!
-    });
+  // async takePicture() {
+  //   const image = await Camera.getPhoto({
+  //     quality: 90,
+  //     allowEditing: false,
+  //     resultType: CameraResultType.Base64,
+  //     source: CameraSource.Camera, // Camera, Photos or Prompt!
+  //   });
 
-    if (image) {
-      const loading = await this.loadingController.create();
-      await loading.present();
+  //   if (image) {
+  //     const loading = await this.loadingController.create();
+  //     await loading.present();
 
-      const result = await this.cameraService.uploadImage(image);
-      loading.dismiss();
-      this.upload = true;
+  //     const result = await this.cameraService.uploadImage(image);
+  //     loading.dismiss();
+  //     this.upload = true;
 
-      if (!result) {
-        const alert = await this.alertController.create({
-          header: 'Upload failed',
-          message: 'There was a problem uploading your picture.',
-          buttons: ['OK'],
-        });
-        await alert.present();
-      }
-    }
-  }
+  //     if (!result) {
+  //       const alert = await this.alertController.create({
+  //         header: 'Upload failed',
+  //         message: 'There was a problem uploading your picture.',
+  //         buttons: ['OK'],
+  //       });
+  //       await alert.present();
+  //     }
+  //   }
+  // }
 
   constructor(
     public dataService: dataService,

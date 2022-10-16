@@ -60,7 +60,10 @@ export class EventService {
 
   async createEvent(rawImage, creatorPlayerID, name, location, description) {
     try {
-      const image = await this.cameraService.uploadImage(rawImage);
+      const image = await this.cameraService.uploadImage(
+        rawImage,
+        'event/' + creatorPlayerID
+      );
       await addDoc(collection(this.firestore, 'events'), {
         name: name.value,
         location: location.value,

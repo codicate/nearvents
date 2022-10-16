@@ -36,30 +36,4 @@ export class ProfilePage implements OnInit {
 
     this.router.navigateByUrl('', { replaceUrl: true });
   }
-
-  async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Camera, // Camera, Photos or Prompt!
-    });
-
-    if (image) {
-      const loading = await this.loadingController.create();
-      await loading.present();
-
-      const result = await this.cameraService.uploadImage(image);
-      loading.dismiss();
-
-      if (!result) {
-        const alert = await this.alertController.create({
-          header: 'Upload failed',
-          message: 'There was a problem uploading your picture.',
-          buttons: ['OK'],
-        });
-        await alert.present();
-      }
-    }
-  }
 }
