@@ -20,6 +20,6 @@ export class TabsPage implements OnInit {
   }
 
   goToProfilePage() {
-    this.router.navigateByUrl('tabs/profile', { replaceUrl: true });
+    this.router.navigateByUrl('tabs/tabs/profile', { replaceUrl: true });
   }
 }
