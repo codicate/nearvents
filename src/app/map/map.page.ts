@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
+import { EventService } from 'services/event.service';
+import { CLIENT_RENEG_LIMIT } from 'tls';
 
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -25,12 +27,13 @@ L.Marker.prototype.options.icon = iconDefault;
 
 export class MapPage implements AfterViewInit {
   private map;
+  events = []
 
   private initMap(): void {
     this.map = L.map('map', {
       renderer: L.canvas(),
-      center: [ 43.132919,-77.635225],
-      zoom: 15
+      center: [43.128806,-77.630220],
+      zoom: 16
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -40,17 +43,25 @@ export class MapPage implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
-
-
-    const marker = new L.Marker([43.129064,-77.628996]);
-    marker.addTo(this.map)
+    for (let e of this.events) {
+      const popup = L.popup().setContent(`<center> ${e.name} </center> <img src="${e.banner}"> `);
+      const marker = new L.Marker(e.location);
+      marker.bindPopup(popup);
+      marker.addTo(this.map);
+    }
     setTimeout(()=> { this.map.invalidateSize()}, 500);
 
   }
 
-  constructor() { }
+  constructor(
+    private eventService: EventService
+  ) { }
 
-  ngAfterViewInit(): void {
+  async ngOnInit() {
+  }
+
+  async ngAfterViewInit() {
+    this.events = await this.eventService.getAllEvents();
     this.initMap();
   }
 }
