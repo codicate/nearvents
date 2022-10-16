@@ -6,7 +6,7 @@
 
   <div *ngIf="events.length > 0">
     <div
-      (click)="onEventClick(event.id)"
+      (click)="onEventClick(event.creatorPlayerID)"
       *ngFor="let event of events; let i = index"
     >
       <ion-row class="event-main">

@@ -20,7 +20,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'eventpage',
+        path: 'eventpage/:id',
         loadChildren: () =>
           import('../eventpage/eventpage.module').then(
             (m) => m.EventpagePageModule
