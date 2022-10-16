@@ -86,7 +86,7 @@ export class AuthService {
       email: user.email,
       name: name.value,
       points: 80,
-      rank: 0,
+      events: [],
       images: [],
       picture,
     });

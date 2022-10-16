@@ -47,6 +47,7 @@ export class EventpagePage implements OnInit {
         }
         this.user = user;
         this.event = ev;
+        console.log(ev);
       }
     });
   }
@@ -72,5 +73,11 @@ export class EventpagePage implements OnInit {
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera, // Camera, Photos or Prompt!
     });
+    const result = await this.eventService.participateEvent(
+      image,
+      this.event.creatorPlayerID,
+      this.user.id
+    );
+    console.log(result);
   }
 }
