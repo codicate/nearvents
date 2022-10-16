@@ -51,16 +51,7 @@ export class InfoPage implements OnInit {
       const result = await this.authService.createUser(this.image, this.name);
       await loading.dismiss();
 
-      this.router.navigateByUrl('tabs', { replaceUrl: true });
-
-      // if (!result) {
-      //   const alert = await this.alertController.create({
-      //     header: 'Upload failed',
-      //     message: 'There was a problem uploading your picture.',
-      //     buttons: ['OK'],
-      //   });
-      //   await alert.present();
-      // }
+      this.router.navigateByUrl('tabs/tabs/feed', { replaceUrl: true });
     }
   }
 
