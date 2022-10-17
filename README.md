@@ -1,14 +1,17 @@
-# Introduction
+#  Nearvents
 
-Social network for small communities to share events and photos.
+Social network for people to discover nearby communities, events, and experiences
+
+Winner of DandyHacks'22, a MLH hackathon
 
 # Screenshots 
 
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_25.png) ![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_1_25.png) ![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_2_1_25.png) 
-
- ![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_4_25.png) 
- ![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_3_25.png)
- ![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_tabs_tabs_feediPhone_12_Pro_25.png)
+![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_25.png)
+![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_1_25.png)
+![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_2_1_25.png)
+![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_4_25.png)
+![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_3_25.png)
+![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_tabs_tabs_feediPhone_12_Pro_25.png)
 
 # How to run
 
