@@ -6,12 +6,7 @@ Winner of DandyHacks'22, a MLH hackathon
 
 # Screenshots 
 
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_25.png)
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_1_25.png)
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_2_1_25.png)
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_4_25.png)
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_Pixel_5_3_25.png)
-![alt text](https://www.simpleimageresizer.com/_uploads/photos/21dea7aa/localhost_8100_tabs_tabs_feediPhone_12_Pro_25.png)
+![Scene](https://user-images.githubusercontent.com/63321455/196113767-decda016-7ef6-4514-adec-ba9ae6a0fdbb.png)
 
 # How to run
 
@@ -20,6 +15,7 @@ You need to have node.js and npm set up first. (https://nodejs.org/en/). Open a 
 Install angular
 
 ```npm install -g @angular/cli```
+
 
 Install ionic
 
